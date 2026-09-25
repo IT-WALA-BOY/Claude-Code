@@ -15,6 +15,12 @@ function figma_projects(): array
     );
 }
 
+/** Projects for the task form. Done ones stay listed (last), so editing a task never drops its project. */
+function figma_project_options(): array
+{
+    return rows("SELECT id, name, status FROM figma_projects ORDER BY status = 'done', name");
+}
+
 /** Status label and tone. An open project past its due date reads Behind. */
 function project_status(array $p): array
 {

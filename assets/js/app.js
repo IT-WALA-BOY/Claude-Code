@@ -156,6 +156,8 @@ export function formData(form) {
 export function fillForm(form, data) {
   form.reset();
   for (const el of form.elements) {
+    // reset() leaves hidden inputs as last set, so a new record would keep the id of the last one edited.
+    if (el.type === 'hidden' && el.name) el.value = '';
     if (!el.name || !(el.name in data)) continue;
     const value = data[el.name];
     if (el.type === 'radio') el.checked = String(el.value) === String(value);

@@ -34,12 +34,15 @@ Current guidance on AI-assisted coding agrees on three things: keep the rules in
 
 ## 5. Structure that keeps growing screens clean
 - One generic record dialog pattern: `[data-open="id"]` opens a form empty (with `data-fill` defaults), `[data-edit="id"]` fills it from the closest `[data-record]` JSON, repeating rows come from a `<template>`, delete comes from `data-delete-api`. Every add/edit form in the product reuses it. Check `data-edit` before `data-open`, or an item inside a clickable day cell opens "new" instead of itself.
+- **`form.reset()` does not clear hidden inputs.** Setting `.value` on `<input type="hidden">` also changes its default, so after editing a record, "Add" reuses the old `id` and every new entry overwrites that record. Clear hidden inputs yourself when a dialog opens.
+- A select filled from a record must list the record's current value, even if it is archived (for example a finished project), or saving the edit silently drops it.
 - After a save, a soft refresh fetches the current URL and swaps the page and sidebar regions. The server stays the single source of truth.
 - Store times as the app clock's wall time and compute "today" on the server; send today's date to the client in a meta tag instead of trusting the browser's time zone.
-- For work that crosses midnight (night shifts), group by "work night", not by calendar date.
+- For work that crosses midnight (night shifts), group by "work night", not by calendar date. Every total counts: a heatmap grouped by `DATE(starts_at)` put 1 AM work on the wrong day.
 
 ## 6. Test on the real stack
 - Drive every screen and interaction with Playwright and fail on any console error or 4xx/5xx response. Include security checks: private folders return 403, API without a session returns 401, API without the CSRF token is refused, GET logout does nothing, the lockout triggers.
+- **Stress test like a real user, on an empty install.** Add 20 to 30 records on every form through the UI, mixing adds with edits, cancels and deletes, then compare every number on screen (badges, column counts, KPIs, chart totals) with your own SQL. Single happy-path tests missed the add-after-edit bug.
 - **Test behind the production web server, not only the dev server.** Apache turned an unknown status code (419) into a 500; PHP's built-in server passed it through. Use standard codes (403 for CSRF).
 - Test the deploy guide itself (for XAMPP: create the database in phpMyAdmin, run the installer, export `.sql`, import into a fresh database, hand-write `config.php`, sign in). XAMPP already has `htdocs/dashboard`, so do not tell users to install there.
 - Phone width: find overflow by hiding each element in turn and watching `document.documentElement.scrollWidth`. A classic culprit is a screen-reader-only label (`position: absolute`) inside a table header, positioned against the page instead of the scroll container: give the scroll container `position: relative`.

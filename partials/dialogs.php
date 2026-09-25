@@ -1,5 +1,5 @@
 <?php
-$projects = rows("SELECT id, name FROM figma_projects WHERE status <> 'done' ORDER BY name");
+$projects = figma_project_options();
 ?>
 <dialog class="palette" id="palette" aria-label="Search">
   <div class="palette-input"><?= icon('search', 18) ?><input type="search" placeholder="Search tasks, leads, goals, projects" aria-label="Search"><kbd>Esc</kbd></div>
@@ -58,7 +58,7 @@ $projects = rows("SELECT id, name FROM figma_projects WHERE status <> 'done' ORD
         <label class="field"><span class="field-label">Estimate (minutes)</span><span class="control"><input type="number" name="est_minutes" min="0" step="5" inputmode="numeric" placeholder="60"></span></label>
         <label class="field"><span class="field-label">Figma project</span><span class="control control-select"><select name="project_id">
           <option value="">None</option>
-          <?php foreach ($projects as $p): ?><option value="<?= (int) $p['id'] ?>"><?= e($p['name']) ?></option><?php endforeach ?>
+          <?php foreach ($projects as $p): ?><option value="<?= (int) $p['id'] ?>"><?= e($p['name']) ?><?= $p['status'] === 'done' ? ' (done)' : '' ?></option><?php endforeach ?>
         </select></span></label>
       </div>
       <label class="field">

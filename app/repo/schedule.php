@@ -89,17 +89,21 @@ function schedule_today(): array
     ];
 }
 
-/** Done focus hours per day for the heatmap: [Y-m-d => hours]. */
+/** Done focus hours per work night for the heatmap: [Y-m-d => hours]. Work after midnight counts for the night before. */
 function focus_hours(string $from, string $to): array
 {
     $out = [];
     foreach (rows(
-        'SELECT DATE(starts_at) AS d, SUM(TIMESTAMPDIFF(MINUTE, starts_at, ends_at)) AS m
-         FROM schedule_blocks WHERE done = 1 AND starts_at BETWEEN ? AND ? GROUP BY d',
-        [$from . ' 00:00:00', $to . ' 23:59:59']
+        'SELECT starts_at, TIMESTAMPDIFF(MINUTE, starts_at, ends_at) AS m
+         FROM schedule_blocks WHERE done = 1 AND starts_at BETWEEN ? AND ?',
+        [$from . ' 00:00:00', add_days($to, 1) . ' 23:59:59']
     ) as $r) {
-        $out[$r['d']] = $r['m'] / 60;
+        $night = night_of($r['starts_at']);
+        if ($night >= $from && $night <= $to) {
+            $out[$night] = ($out[$night] ?? 0) + $r['m'] / 60;
+        }
     }
+    ksort($out);
     return $out;
 }
 
