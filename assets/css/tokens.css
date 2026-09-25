@@ -1,0 +1,91 @@
+/* Design tokens, copied from the Figma variables (page "Design System"). Light mode only. */
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-var.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg-canvas: #f5f5f4;
+  --bg-surface: #ffffff;
+  --bg-subtle: #fafaf9;
+  --bg-muted: #efefed;
+  --bg-shell: #f5f5f4;
+  --bg-inverse: #111111;
+  --bg-scrim: rgb(17 17 17 / 0.4);
+  --bg-skeleton: #e4e3e0;
+  --bg-accent: #3d4ef5;
+  --bg-accent-hover: #3645d8;
+  --bg-accent-soft: #e9ebfe;
+  --bg-positive-soft: #f0fdf4;
+  --bg-warning-soft: #fefce8;
+  --bg-negative-soft: #fef2f2;
+  --bg-negative: #b91c1c;
+
+  /* Text and icons */
+  --text-primary: #111111;
+  --text-secondary: #3d3d3d;
+  --text-muted: #6f6f6f;
+  --text-accent: #3645d8;
+  --text-positive: #15803d;
+  --text-warning: #a16207;
+  --text-negative: #b91c1c;
+  --icon-accent: #3d4ef5;
+
+  /* Borders */
+  --border: #e4e3e0;
+  --border-strong: #d3d2ce;
+  --border-hover: #6f6f6f;
+  --border-accent: #3d4ef5;
+  --focus-ring: #e9ebfe;
+
+  /* Category pastels: bg (pill), text, bar (Gantt, calendar, charts) */
+  --blue-bg: #e1eaf8;    --blue-text: #2d5a96;   --blue-bar: #c9daf2;
+  --green-bg: #ddf3e0;   --green-text: #2a7039;  --green-bar: #bfe8c6;
+  --purple-bg: #e5e1f8;  --purple-text: #5343ae; --purple-bar: #c9c2f2;
+  --pink-bg: #f8e1e1;    --pink-text: #a83434;   --pink-bar: #f2c4c4;
+  --orange-bg: #fce9d6;  --orange-text: #a14e12; --orange-bar: #f7d2ae;
+  --yellow-bg: #f9f0cc;  --yellow-text: #7a5e00; --yellow-bar: #f0df97;
+
+  /* Chart series */
+  --chart-ink: #111111;
+  --chart-periwinkle: #a3a9f7;
+  --chart-steel: #afc6db;
+  --chart-mint: #b7e8c0;
+  --chart-rose: #f4b8b8;
+  --chart-green: #2a7039;
+
+  /* Spacing */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+
+  /* Radius */
+  --r-sm: 6px; --r-md: 8px; --r-field: 10px; --r-inner: 12px; --r-lg: 16px; --r-full: 999px;
+
+  /* Elevation */
+  --shadow-card: 0 1px 2px rgb(17 17 17 / 0.04);
+  --shadow-menu: 0 12px 32px -8px rgb(17 17 17 / 0.16), 0 2px 6px rgb(17 17 17 / 0.06);
+  --shadow-drag: 0 18px 40px -10px rgb(17 17 17 / 0.28), 0 4px 10px rgb(17 17 17 / 0.08);
+  --ring: 0 0 0 3px var(--focus-ring);
+
+  /* Type */
+  --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Icons: Regular 1.25 (default), Light 1, Thin 0.85 */
+  --icon-stroke: 1.25;
+
+  /* Motion */
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --fast: 120ms;
+  --base: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --fast: 0ms; --base: 0ms; }
+}
