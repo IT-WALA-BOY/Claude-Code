@@ -34,7 +34,8 @@
     "ProgressRow": "17:652",
     "TaskRow": "17:684",
     "KPICard": "26:937",
-    "SidebarV1": "16:609"
+    "SidebarV1": "16:609",
+    "TaskCard": "35:1257"
   },
   "docFrames": {
     "cover": "14:418",
@@ -45,11 +46,218 @@
     "components": "15:419"
   },
   "screens": {
-    "01 Overview v2": "27:415",
-    "01 Overview v1 (previous)": "19:530"
+    "01 Overview": "27:415",
+    "02.1 Tasks \u00b7 Board": "36:1065",
+    "02.2 Tasks \u00b7 Timeline": "37:1761",
+    "03 Schedule": "38:1948",
+    "Overview v1 (previous)": "19:530"
   },
   "iconsNote": "61 icon components (Lucide + custom linkedin-square) named Icon/<name> inside DS \u00b7 04 Icons (14:779)",
   "optionsBoards": {
     "LinkedIn icon and Categories": "33:964"
+  },
+  "dataBible": {
+    "now": "Thu 24 Sep 2026, 9:40 PM Pacific (Fri 9:40 AM PKT)",
+    "categoryCounts": {
+      "LinkedIn": 6,
+      "Upwork": 3,
+      "Self study": 4,
+      "Figma": 5,
+      "total": 18
+    },
+    "statusCounts": {
+      "To do": 8,
+      "In progress": 6,
+      "Review": 2,
+      "Later": 2,
+      "Done this week": 5
+    },
+    "tasks": [
+      [
+        "L1",
+        "Follow up: Jake Morrison, Morrison Family Dental Group",
+        "LinkedIn",
+        "Urgent",
+        "To do",
+        "22 Sep (2 days late)"
+      ],
+      [
+        "L2",
+        "Post: teardown of a neglected medical brand homepage",
+        "LinkedIn",
+        "Low",
+        "In progress",
+        "Today"
+      ],
+      [
+        "L3",
+        "Teardown Loom for Brightline Physio",
+        "LinkedIn",
+        "Moderate",
+        "To do",
+        "26 Sep"
+      ],
+      [
+        "L4",
+        "Shortlist 10 B2B SaaS founders in the UK",
+        "LinkedIn",
+        "Low",
+        "To do",
+        "27 Sep"
+      ],
+      [
+        "L5",
+        "Reply to Sarah Chen, Northwind Analytics",
+        "LinkedIn",
+        "Moderate",
+        "In progress",
+        "25 Sep"
+      ],
+      [
+        "L6",
+        "Paid audit proposal: Qualia Health",
+        "LinkedIn",
+        "Urgent",
+        "Review",
+        "25 Sep"
+      ],
+      [
+        "U1",
+        "Proposal: SaaS onboarding redesign for a FinOps startup",
+        "Upwork",
+        "Moderate",
+        "In progress",
+        "Today, 10 PM"
+      ],
+      [
+        "U2",
+        "Update case study: Multani Threads",
+        "Upwork",
+        "Low",
+        "To do",
+        "29 Sep"
+      ],
+      [
+        "U3",
+        "Reply to invite: roofing company landing page",
+        "Upwork",
+        "Urgent",
+        "To do",
+        "25 Sep"
+      ],
+      [
+        "S1",
+        "CXL: Conversion research, lesson 4 of 9",
+        "Self study",
+        "Moderate",
+        "In progress",
+        "Today"
+      ],
+      [
+        "S2",
+        "CXL: Copywriting for conversions, intro",
+        "Self study",
+        "Low",
+        "To do",
+        "28 Sep"
+      ],
+      [
+        "S3",
+        "Mobile app patterns: onboarding flows",
+        "Self study",
+        "Low",
+        "To do",
+        "26 Sep"
+      ],
+      [
+        "S4",
+        "Read: Refactoring UI, chapter 3",
+        "Self study",
+        "Low",
+        "Later",
+        "30 Sep"
+      ],
+      [
+        "F1",
+        "Send Qualitas dashboard revisions v3",
+        "Figma",
+        "Urgent",
+        "In progress",
+        "Today, 11 PM"
+      ],
+      [
+        "F2",
+        "Fruits Au Travail: mobile breakpoints",
+        "Figma",
+        "Moderate",
+        "To do",
+        "27 Sep"
+      ],
+      [
+        "F3",
+        "Mobile app case study: 2 of 5 screens",
+        "Figma",
+        "Moderate",
+        "In progress",
+        "30 Sep"
+      ],
+      [
+        "F4",
+        "Claude code to Figma: ScaleX pricing page",
+        "Figma",
+        "Moderate",
+        "Review",
+        "26 Sep"
+      ],
+      [
+        "F5",
+        "Portfolio site: About page",
+        "Figma",
+        "Low",
+        "Later",
+        "2 Oct"
+      ]
+    ],
+    "dueToday": "L1 (late), F1, U1, S1, L2 = 5 rows; 1 overdue + 4 due today",
+    "income": {
+      "september": 6240,
+      "goal": 10000,
+      "upwork": 4850,
+      "direct": 1390,
+      "weeks": [
+        [
+          1020,
+          200
+        ],
+        [
+          1180,
+          400
+        ],
+        [
+          1650,
+          500
+        ],
+        [
+          1000,
+          290
+        ]
+      ]
+    },
+    "spend": {
+      "september": 412,
+      "connects": 90
+    },
+    "linkedin": {
+      "followUpsDue": 4,
+      "overdue": 2,
+      "pipeline": 11
+    },
+    "focusHours": 88.5
+  },
+  "sections": {
+    "01 \u00b7 Dashboard": "39:2752",
+    "02 \u00b7 Tasks": "39:2753",
+    "03 \u00b7 Schedule": "39:2754",
+    "Archive and options": "39:2755"
   }
 }

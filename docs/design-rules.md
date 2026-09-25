@@ -119,8 +119,13 @@ Every data surface needs 4 states: empty (one sentence + one action), loading (a
 | Page | Ahmad comes here to... |
 |---|---|
 | Overview | see what's due today, what's late, and whether September income is on pace for $10K |
+| Tasks · Board | see every task by status and drag cards between To do, In progress, Review and Done |
+| Tasks · Timeline | see what runs when and drag bars (or their edges) to reschedule |
+| Schedule | plan tonight and this week on the night-shift window, and accept the schedule maker's suggestions |
 
-Figma: page `🗒️ Dashboard screens`, frame `01 Overview · 1440` (v2). v1 is kept beside it for comparison.
+Figma: page `🗒️ Dashboard screens`, grouped in sections `01 · Dashboard`, `02 · Tasks`, `03 · Schedule`, and `Archive and options`.
+
+Sidebar picks: LinkedIn uses the Lucide `megaphone` icon. Categories use tinted icon tiles (LinkedIn megaphone, Upwork briefcase-business, Self study graduation-cap, Figma figma) with task counts.
 
 ## Visual references
 
