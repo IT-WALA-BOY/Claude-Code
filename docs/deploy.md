@@ -39,6 +39,18 @@ No terminal? Downloading the whole project from GitHub (**Code > Download ZIP**)
 
 If the installer says it could not write `config.php`, it shows the file contents. Create `config.php` next to `index.php` in the File Manager and paste them in.
 
+## 3b. Only WordPress admin access (no hPanel)
+
+1. WP Admin > **Plugins > Add New**, search **WP File Manager**, install and activate.
+2. Open **WP File Manager**. You are in the site root (where `wp-config.php` is).
+3. Create a folder `workflow`, open it, upload `workflow-dashboard.zip`, right-click it > **Extract files here**, then delete the zip.
+4. Back in the root, open `wp-config.php` (right-click > Code Editor) and copy `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`. Close without saving.
+5. Open `https://yoursite.com/workflow/install.php`, paste those four values, create your admin, leave sample data unticked.
+6. Sign in at `https://yoursite.com/workflow/login`.
+7. Deactivate and delete **WP File Manager** (it is a security risk to keep).
+
+The dashboard's tables have no `wp_` prefix, so they sit next to WordPress's tables without touching them.
+
 ## 4. Moving data from XAMPP to Hostinger
 
 This is the same flow your friend uses:
