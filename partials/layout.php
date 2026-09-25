@@ -17,7 +17,6 @@ $attention = attention_items();
 <link rel="stylesheet" href="<?= e(asset('css/app.css')) ?>">
 <link rel="icon" href="<?= e(asset('favicon.svg')) ?>" type="image/svg+xml">
 <script type="module" src="<?= e(asset('js/app.js')) ?>"></script>
-<script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"<?= e(base_path()) ?>/*"},{"not":{"href_matches":"<?= e(base_path()) ?>/assets/*"}},{"not":{"selector_matches":"[data-no-prerender]"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
 <div class="app">

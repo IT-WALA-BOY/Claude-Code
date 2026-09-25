@@ -1151,6 +1151,7 @@ body.is-drag-active, body.is-drag-active * { cursor: grabbing !important; user-s
 .keys { display: grid; grid-template-columns: auto 1fr; gap: 10px 14px; align-items: center; }
 
 /* ---------- Page transitions ---------- */
+.page-enter { animation: fade-in 140ms var(--ease-out); }
 @view-transition { navigation: auto; }
 ::view-transition-group(side) { animation: none; }
 ::view-transition-old(page) { animation: fade-out 90ms var(--ease-in) both; }

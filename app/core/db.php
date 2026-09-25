@@ -6,8 +6,11 @@ function db(): PDO
     static $pdo = null;
     if ($pdo === null) {
         $c = config()['db'];
+        // On Windows, "localhost" tries IPv6 first and waits about a second before falling back to MySQL
+        // on IPv4, on every request. 127.0.0.1 connects straight away.
+        $host = PHP_OS_FAMILY === 'Windows' && $c['host'] === 'localhost' ? '127.0.0.1' : $c['host'];
         $pdo = new PDO(
-            "mysql:host={$c['host']};dbname={$c['name']};charset=utf8mb4",
+            "mysql:host={$host};dbname={$c['name']};charset=utf8mb4",
             $c['user'],
             $c['pass'],
             [

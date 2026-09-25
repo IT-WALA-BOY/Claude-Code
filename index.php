@@ -32,6 +32,11 @@ if ($path === 'logout') {
 
 require_sign_in();
 
+// Page views only read the session. Releasing its file lock lets prefetches and clicks run side by side.
+if (!is_post()) {
+    session_write_close();
+}
+
 if (preg_match('#^api/([a-z]+)/([a-z_]+)$#', $path, $m)) {
     if (!is_post()) {
         json_out(['error' => 'Use POST.'], 405);

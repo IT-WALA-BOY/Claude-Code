@@ -26,6 +26,10 @@ No terminal? Downloading the whole project from GitHub (**Code > Download ZIP**)
 5. Fill in the database details (XAMPP default: host `localhost`, user `root`, empty password, database `workflow`), your name, username and password. Tick "Load sample data" if you want to try it with example data.
 6. Sign in at `http://localhost/workflow/login`.
 
+**Make XAMPP fast on Windows (recommended):**
+- Keep the database host as `localhost` or `127.0.0.1`. The app uses `127.0.0.1` on Windows automatically, because `localhost` makes PHP wait about a second per page while it tries IPv6 first.
+- Turn on OPcache: XAMPP Control Panel > Apache > **Config** > `PHP (php.ini)`, find `;zend_extension=opcache` and remove the `;`, then add `opcache.enable=1` below it. Save and restart Apache. PHP then stops recompiling every file on every click.
+
 ## 3. Put it on Hostinger
 
 1. **hPanel > Databases > MySQL Databases:** create a database and a user, and give the user all privileges on it. Note the host (usually `localhost`), database name, user and password.

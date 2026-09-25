@@ -31,7 +31,7 @@ export async function api(path, data = {}) {
   const body = await res.json().catch(() => ({}));
   if (res.status === 401) location.reload();
   if (!res.ok) throw new Error(body.error || 'Something went wrong. Try again.');
-  resetPrerender();
+  clearPrefetch();
   return body;
 }
 
@@ -47,14 +47,6 @@ export async function optimistic(apply, send, undo) {
   }
 }
 
-// Prerendered pages may hold old data after a write, so drop and re-add the rules.
-function resetPrerender() {
-  const rules = $('script[type="speculationrules"]');
-  if (!rules) return;
-  const copy = rules.cloneNode(true);
-  rules.remove();
-  document.head.append(copy);
-}
 
 /* ---------- Toasts ---------- */
 export function toast(message, { error = false, action = null, onAction = null, ms = 3200 } = {}) {
@@ -188,19 +180,107 @@ async function submitForm(form, submitter) {
   }
 }
 
-/* ---------- Soft refresh: re-render the page from the server without a reload ---------- */
+/* ---------- Instant navigation ----------
+ * Links to other screens load without a full page reload: the HTML is fetched when the pointer rests on
+ * a link (or presses it), then the page area, sidebar and title are swapped in. The sidebar, fonts, CSS
+ * and scripts stay loaded, so a click shows the new screen in a few milliseconds. Any write clears the
+ * cache, so a prefetched page never shows old data.
+ */
 const pageModules = new Map();
+const prefetched = new Map(); // url -> { at, html: Promise<{ url, html } | null> }
+const PREFETCH_MS = 30000;
+const HOVER_MS = 65;
+const SWAP = ['#page', '#side-nav', '.bell', '#bell-menu'];
 
-export async function refresh({ flash = null } = {}) {
-  const res = await fetch(location.href);
-  if (res.redirected || !res.ok) return location.reload();
-  const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
-  for (const sel of ['#page', '#side-nav', '.bell', '#bell-menu']) {
+function clearPrefetch() {
+  prefetched.clear();
+}
+
+/** A same-app page link we can load in place (not a download, asset, export, new tab or other site). */
+function navLink(a, e) {
+  if (!a || a.target || a.hasAttribute('download') || a.matches('[data-no-prerender], [data-open], [data-edit]')) return null;
+  if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button > 0)) return null;
+  const url = new URL(a.href, location.href);
+  const inApp = url.pathname.startsWith(`${base}/`) || url.pathname === (base || '/');
+  if (url.origin !== location.origin || !inApp) return null;
+  if (/\/(assets|api|export|logout|login|install\.php)(\/|$)/.test(url.pathname.slice(base.length))) return null;
+  if (url.pathname === location.pathname && url.search === location.search && url.hash) return null;
+  return url;
+}
+
+function load(url) {
+  const key = url.href;
+  const hit = prefetched.get(key);
+  if (hit && Date.now() - hit.at < PREFETCH_MS) return hit.html;
+  const html = fetch(key, { credentials: 'same-origin' })
+    .then(async (res) => (res.ok && !new URL(res.url).pathname.endsWith('/login') ? { url: res.url, html: await res.text() } : null))
+    .catch(() => null);
+  prefetched.set(key, { at: Date.now(), html });
+  return html;
+}
+
+/** Replaces the page area, sidebar, bell and title with the ones from a fetched document. */
+function swapIn(doc) {
+  for (const sel of SWAP) {
     const next = $(sel, doc);
     const current = $(sel);
     if (next && current) current.replaceWith(next);
   }
+  document.title = doc.title;
+  const h1 = $('.topbar h1');
+  const nextH1 = $('.topbar h1', doc);
+  if (h1 && nextH1) h1.textContent = nextH1.textContent;
   initPage();
+}
+
+async function navigate(url, { push = true } = {}) {
+  closeMenu();
+  $('#side')?.classList.remove('is-open');
+  const result = await load(url);
+  if (!result) {
+    location.href = url.href; // signed out, server error or offline: let the browser handle it
+    return;
+  }
+  const doc = new DOMParser().parseFromString(result.html, 'text/html');
+  if (push) history.pushState({}, '', result.url);
+  swapIn(doc);
+  const target = url.hash && document.getElementById(url.hash.slice(1));
+  if (target) target.scrollIntoView();
+  else window.scrollTo(0, 0);
+  $('#page').classList.add('page-enter');
+}
+
+function instantNavigation() {
+  let hoverTimer = 0;
+  document.addEventListener('pointerover', (e) => {
+    const url = navLink(e.target.closest('a[href]'));
+    clearTimeout(hoverTimer);
+    if (url) hoverTimer = setTimeout(() => load(url), HOVER_MS);
+  });
+  document.addEventListener('pointerdown', (e) => {
+    const url = navLink(e.target.closest('a[href]'), e);
+    if (url) load(url);
+  });
+  document.addEventListener('focusin', (e) => {
+    const url = navLink(e.target.closest?.('a[href]'));
+    if (url) load(url);
+  });
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented) return;
+    const url = navLink(e.target.closest('a[href]'), e);
+    if (!url) return;
+    e.preventDefault();
+    navigate(url);
+  });
+  window.addEventListener('popstate', () => navigate(new URL(location.href), { push: false }));
+}
+
+/* ---------- Soft refresh: re-render the current page from the server without a reload ---------- */
+export async function refresh({ flash = null } = {}) {
+  clearPrefetch();
+  const result = await load(new URL(location.href));
+  if (!result) return location.reload();
+  swapIn(new DOMParser().parseFromString(result.html, 'text/html'));
   if (flash) $(`[data-id="${flash}"]`)?.classList.add('flash');
 }
 
@@ -435,6 +515,7 @@ function boot() {
 
   startClock();
   tooltips();
+  instantNavigation();
   recordDialogs();
   initPage();
 }

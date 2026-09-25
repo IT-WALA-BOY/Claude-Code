@@ -45,8 +45,8 @@ These rules apply to every line of the PHP build. Any AI tool or person writing 
 - Durations: 120 ms for hovers and presses, 180 ms for menus and dialogs, 200 ms maximum otherwise.
 - Easing: `cubic-bezier(.2,.8,.2,1)` for entering, `cubic-bezier(.4,0,1,1)` for leaving.
 - Drag: the card lifts (scale 1.02, rotate 2deg, `Shadow/Drag`) and a dashed placeholder marks the drop spot. Other cards slide into place using FLIP (transform only).
-- Page changes use cross-document View Transitions (a short fade of the main panel). The sidebar stays still.
-- Links prerender on hover through Speculation Rules, so pages open instantly in Chromium browsers.
+- Page changes happen in place: the next page's HTML is fetched when the pointer rests on a link (65 ms) or presses it, then the page area, sidebar and title are swapped with a 140 ms fade. Back and forward work through the History API. Any write clears the prefetch cache.
+- Page views release the PHP session lock right after the sign-in check, so a prefetch never blocks a click.
 - Respect `prefers-reduced-motion`: turn motion off, keep the state change.
 - Banned: parallax, card entry animations, bouncing, spinners where a skeleton fits.
 

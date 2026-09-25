@@ -19,7 +19,9 @@ Current guidance on AI-assisted coding agrees on three things: keep the rules in
 - No libraries unless one earns its weight. Custom drag and drop, Gantt and calendars were about 2 to 3 KB gzipped each.
 - Load each screen's module only on that screen. Pass the shared runtime into page modules (`init(root, app)`) instead of importing it, or a cache-busted URL (`app.js?v=123`) and a plain import (`app.js`) load it twice.
 - Version asset URLs with the file's modified time and cache them for a year; send `no-cache` for unversioned URLs.
-- Instant navigation: Speculation Rules prerender on hover (`eagerness: "moderate"`), exclude downloads and logout (`data-no-prerender`), and **drop and re-add the rules after every write** so a prerendered page never shows stale data.
+- **Instant navigation without a framework:** on `pointerover` (after 65 ms) or `pointerdown`, fetch the link's HTML into a small cache; on click, `preventDefault`, parse it, swap the page area, sidebar and title, `pushState`, and re-run the page's module; handle `popstate` for Back. Skip downloads, exports, logout, other origins and modifier-clicks. Clear the cache after every write. It took navigation from 200 to 300 ms (full reload) to 40 to 100 ms, and works in every browser. (Speculation Rules prerendering was tried first: Chromium only, and it fights the session lock.)
+- **Release the session lock on page views.** PHP locks the session file for the whole request, so a hover prefetch and the click queue behind each other. Call `session_write_close()` right after the sign-in check on GET requests.
+- **Windows + MySQL + "localhost" costs about a second per request** (IPv6 is tried first). Connect to `127.0.0.1` on Windows. Also tell XAMPP users to enable OPcache.
 - Measure: server time per page (aim under 50 ms) and first-visit weight (the Workflow build was about 100 KB gzipped including the font).
 
 ## 4. Smoothness (motion rules)
