@@ -192,7 +192,7 @@ async function submitForm(form, submitter) {
 const pageModules = new Map();
 
 export async function refresh({ flash = null } = {}) {
-  const res = await fetch(location.href, { headers: { 'X-Soft': '1' } });
+  const res = await fetch(location.href);
   if (res.redirected || !res.ok) return location.reload();
   const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
   for (const sel of ['#page', '#side-nav', '.bell', '#bell-menu']) {

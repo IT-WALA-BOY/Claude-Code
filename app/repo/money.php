@@ -4,6 +4,14 @@ declare(strict_types=1);
 const EXPENSE_KINDS = ['daily' => 'Daily costs', 'connects' => 'Upwork Connects', 'tools' => 'Tools and apps', 'other' => 'Other'];
 const EXPENSE_ICONS = ['daily' => 'shopping-bag', 'connects' => 'zap', 'tools' => 'app-window', 'other' => 'receipt'];
 const INCOME_SOURCES = ['upwork' => 'Upwork', 'direct' => 'Direct'];
+const EXPENSE_COLORS = ['daily' => 'orange', 'connects' => 'green', 'tools' => 'purple', 'other' => 'gray'];
+const CONNECTS_PACK = [200, 30.0]; // Connects, USD
+const BUY_QUADRANTS = [
+    'iu' => [1, 1, 'Important and urgent', 'Buy this week', 'circle-alert', 'pink'],
+    'in' => [1, 0, 'Important, not urgent', 'Plan and save for it', 'calendar', 'blue'],
+    'nu' => [0, 1, 'Urgent, not important', 'Quick buy, keep it cheap', 'zap', 'orange'],
+    'nn' => [0, 0, 'Neither', 'Maybe later', 'pause', 'yellow'],
+];
 
 function income_goal(): float
 {
@@ -150,7 +158,7 @@ function buy_items(): array
     return rows('SELECT * FROM buy_items WHERE bought_at IS NULL ORDER BY position, id');
 }
 
-function buy_bought_recent(): array
+function buy_bought_since(string $date): array
 {
-    return rows('SELECT * FROM buy_items WHERE bought_at IS NOT NULL ORDER BY bought_at DESC LIMIT 5');
+    return rows('SELECT * FROM buy_items WHERE bought_at >= ? ORDER BY bought_at DESC', [$date . ' 00:00:00']);
 }

@@ -39,10 +39,17 @@ function greeting_name(): string
     return setting('greeting_name') ?: (explode(' ', admin()['name'])[0] ?: 'there');
 }
 
+/** Failures count from the lock window, or from the last successful sign-in if that is later. */
+function failures_since(): string
+{
+    $window = date('Y-m-d H:i:s', time() - LOGIN_LOCK_MINUTES * 60);
+    return max($window, setting('last_sign_in', $window));
+}
+
 /** Minutes left on the lock for this IP, or 0 if it can try again. */
 function login_locked_minutes(): int
 {
-    $since = date('Y-m-d H:i:s', time() - LOGIN_LOCK_MINUTES * 60);
+    $since = failures_since();
     $tries = rows(
         'SELECT attempted_at FROM login_attempts WHERE ip = ? AND attempted_at > ? ORDER BY attempted_at DESC',
         [client_ip(), $since]
@@ -66,10 +73,10 @@ function attempt_sign_in(string $username, string $password, bool $remember): ?s
 
     if (!$ok) {
         insert('login_attempts', ['ip' => client_ip(), 'attempted_at' => date('Y-m-d H:i:s')]);
-        $left = LOGIN_MAX_TRIES - count(rows(
-            'SELECT id FROM login_attempts WHERE ip = ? AND attempted_at > ?',
-            [client_ip(), date('Y-m-d H:i:s', time() - LOGIN_LOCK_MINUTES * 60)]
-        ));
+        $left = LOGIN_MAX_TRIES - (int) val(
+            'SELECT COUNT(*) FROM login_attempts WHERE ip = ? AND attempted_at > ?',
+            [client_ip(), failures_since()]
+        );
         return $left > 0
             ? "Wrong username or password. $left " . ($left === 1 ? 'try' : 'tries') . ' left.'
             : 'Too many wrong tries. Try again in ' . LOGIN_LOCK_MINUTES . ' min.';
@@ -78,7 +85,8 @@ function attempt_sign_in(string $username, string $password, bool $remember): ?s
     if (password_needs_rehash($admin['password_hash'], PASSWORD_DEFAULT)) {
         update('admin', 1, ['password_hash' => password_hash($password, PASSWORD_DEFAULT)]);
     }
-    q('DELETE FROM login_attempts WHERE ip = ?', [client_ip()]);
+    save_setting('last_sign_in', date('Y-m-d H:i:s'));
+    q('DELETE FROM login_attempts WHERE attempted_at < ?', [date('Y-m-d H:i:s', time() - 30 * 86400)]);
     session_regenerate_id(true);
     $_SESSION = ['admin' => 1, 'seen' => time(), 'remember' => $remember, 'csrf' => bin2hex(random_bytes(32))];
     if ($remember) {

@@ -11,6 +11,7 @@ require __DIR__ . '/../lib/time.php';
 require __DIR__ . '/../lib/format.php';
 require __DIR__ . '/../lib/charts.php';
 require __DIR__ . '/../lib/ui.php';
+require __DIR__ . '/../lib/ai.php';
 
 function config(): array
 {

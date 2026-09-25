@@ -48,6 +48,12 @@ if (preg_match('#^api/([a-z]+)/([a-z_]+)$#', $path, $m)) {
     json_out(['ok' => true] + ($fn() ?? []));
 }
 
+if ($path === 'export') {
+    require __DIR__ . '/app/export.php';
+    export_csv((string) ($_GET['type'] ?? ''));
+    exit;
+}
+
 $slug = $path === '' ? 'overview' : $path;
 if (!isset(PAGES[$slug])) {
     http_response_code(404);

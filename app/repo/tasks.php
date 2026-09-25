@@ -129,14 +129,13 @@ function task_counts(): array
     return array_map('intval', $row ?? []);
 }
 
-/** Percent change in open tasks against 7 days ago: open then = open now - created since + completed since. */
-function task_open_change(int $openNow): ?float
+/** Change in open tasks over the last 7 days: tasks added minus tasks finished. */
+function task_open_change(): int
 {
     $since = add_days(today(), -7) . ' 00:00:00';
     $created = (int) val('SELECT COUNT(*) FROM tasks WHERE created_at >= ?', [$since]);
     $completed = (int) val("SELECT COUNT(*) FROM tasks WHERE status = 'done' AND completed_at >= ?", [$since]);
-    $then = $openNow - $created + $completed;
-    return $then > 0 ? ($openNow - $then) / $then * 100 : null;
+    return $created - $completed;
 }
 
 function open_counts_by_category(): array

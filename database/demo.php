@@ -23,15 +23,15 @@ function seed_demo(PDO $pdo): void
     // Figma projects
     $projects = [];
     foreach ([
-        ['Qualitas dashboard', 'Qualitas', 'client', 0, 'active', 14, 8],
-        ['Fruits Au Travail website', 'Fruits Au Travail', 'client', 3, 'active', 9, 6],
-        ['ScaleX pricing page', 'ScaleX', 'client', 2, 'review', 3, 3],
-        ['Mobile app case study', '', 'portfolio', 6, 'active', 5, 2],
-        ['Portfolio site', '', 'portfolio', 21, 'active', 8, 3],
-    ] as $i => [$name, $client, $kind, $due, $status, $total, $done]) {
+        ['Qualitas dashboard', 'Qualitas', 'client', 'upwork', 'B2B SaaS · 12 screens · revisions v3 tonight', 0, 'revisions'],
+        ['Fruits Au Travail website', 'Fruits Au Travail', 'client', 'direct', 'B2B landing page · desktop done, mobile next', 3, 'active'],
+        ['ScaleX pricing page', 'ScaleX', 'client', 'upwork', 'Claude code converted to Figma · cleanup', 2, 'review'],
+        ['Mobile app case study', '', 'portfolio', 'self', 'New service: mobile app design · 5 screens', 6, 'active'],
+        ['Portfolio site', '', 'portfolio', 'self', 'Built in Claude Code · must not look generic', 21, 'active'],
+    ] as $i => [$name, $client, $kind, $source, $note, $due, $status]) {
         $projects[$name] = $ins('figma_projects', [
-            'name' => $name, 'client' => $client, 'kind' => $kind, 'figma_url' => 'https://www.figma.com/design/example',
-            'due_on' => $d($due), 'status' => $status, 'screens_total' => $total, 'screens_done' => $done,
+            'name' => $name, 'client' => $client, 'kind' => $kind, 'source' => $source, 'note' => $note,
+            'figma_url' => 'https://www.figma.com/design/example', 'due_on' => $d($due), 'status' => $status,
             'last_opened_at' => $at(-$i, '21:00:00'), 'position' => $i, 'created_at' => $now,
         ]);
     }
@@ -97,10 +97,25 @@ function seed_demo(PDO $pdo): void
             'important' => (int) ($prio !== 'low'), 'urgent' => (int) ($prio === 'urgent'),
             'start_on' => $d($due - 3), 'due_on' => $d($due), 'due_time' => $time, 'est_minutes' => [30, 60, 90][$i % 3],
             'position' => $i, 'project_id' => $project ? $projects[$project] : null,
-            'completed_at' => $status === 'done' ? $at(min(0, $due), '23:00:00') : null, 'created_at' => $at(-10, '20:00:00'),
+            'completed_at' => $status === 'done' ? $at(min(0, $due), '23:00:00') : null, 'created_at' => $at(min(-1, $due - 6), '20:00:00'),
         ]);
         foreach ($checks as $j => [$text, $isDone]) {
             $ins('task_checklist', ['task_id' => $taskId, 'text' => $text, 'done' => $isDone, 'position' => $j]);
+        }
+    }
+
+    // Finished tasks from earlier weeks, so the weekly trend in Analytics has history.
+    $done = [9, 11, 8, 12, 10, 12, 13];
+    $titles = ['Upwork proposal', 'LinkedIn follow-ups', 'CXL lesson', 'Client revisions', 'Teardown Loom', 'Case study edits', 'Portfolio section'];
+    foreach ($done as $week => $count) {
+        for ($i = 0; $i < $count; $i++) {
+            $created = -(8 - $week) * 7 - ($i % 5);
+            $completed = min(-1, $created + 2 + $i % 4);
+            $ins('tasks', [
+                'title' => $titles[$i % 7] . ' ' . ($i + 1), 'category_id' => 1 + $i % 4, 'status' => 'done', 'priority' => ['low', 'moderate', 'urgent'][$i % 3],
+                'start_on' => $d($created), 'due_on' => $d($completed), 'position' => 100 + $i, 'est_minutes' => 60,
+                'completed_at' => $at($completed, '22:00:00'), 'created_at' => $at($created, '19:00:00'),
+            ]);
         }
     }
 
@@ -148,15 +163,16 @@ function seed_demo(PDO $pdo): void
     $ins('income', ['received_on' => $d(-1), 'client' => 'Qualitas', 'title' => 'Milestone 4', 'source' => 'upwork', 'amount' => 520, 'currency' => 'USD', 'rate' => $rate, 'status' => 'escrow', 'due_on' => $d(6)]);
 
     // Expenses this month: daily costs in PKR, Connects, tools. Plus last months for trends.
-    $daily = [['Groceries', 18500], ['Internet (Nayatel)', 6500], ['Electricity', 21000], ['Fuel', 12800], ['Food and tea', 9200], ['Phone top-up', 4800]];
-    foreach ($daily as $i => [$title, $pkr]) {
-        $ins('expenses', ['spent_on' => $monthStart->modify('+' . min($i * 4, $dayOfMonth - 1) . ' days')->format('Y-m-d'), 'kind' => 'daily', 'title' => $title, 'amount' => $pkr, 'currency' => 'PKR', 'rate' => $rate]);
+    $daily = [['Groceries, weekly', 18500, 'JazzCash', 'Imtiaz Depalpur'], ['Internet', 6500, 'JazzCash', 'Fiber 50 Mbps, monthly'], ['Electricity bill', 21000, 'Bank transfer', 'LESCO'],
+        ['Fuel', 12800, 'Cash', 'Motorbike'], ['Food and tea', 9200, 'Cash', ''], ['Phone top-up', 4800, 'JazzCash', '']];
+    foreach ($daily as $i => [$title, $pkr, $paidWith, $note]) {
+        $ins('expenses', ['spent_on' => $monthStart->modify('+' . min($i * 4, $dayOfMonth - 1) . ' days')->format('Y-m-d'), 'kind' => 'daily', 'title' => $title, 'amount' => $pkr, 'currency' => 'PKR', 'rate' => $rate, 'paid_with' => $paidWith, 'note' => $note]);
     }
     foreach ([[400, 60], [200, 30]] as $i => [$qty, $usd]) {
-        $ins('expenses', ['spent_on' => $monthStart->modify('+' . min(3 + $i * 12, $dayOfMonth - 1) . ' days')->format('Y-m-d'), 'kind' => 'connects', 'title' => "$qty Connects", 'amount' => $usd, 'currency' => 'USD', 'rate' => $rate, 'quantity' => $qty]);
+        $ins('expenses', ['spent_on' => $monthStart->modify('+' . min(3 + $i * 12, $dayOfMonth - 1) . ' days')->format('Y-m-d'), 'kind' => 'connects', 'title' => "$qty Upwork Connects", 'amount' => $usd, 'currency' => 'USD', 'rate' => $rate, 'quantity' => $qty, 'paid_with' => 'Upwork balance']);
     }
     foreach ([['Figma Professional', 16, 3], ['ChatGPT Plus', 20, 8], ['Notion Plus', 10, 12], ['Framer Mini', 18, 26]] as [$title, $usd, $renew]) {
-        $ins('expenses', ['spent_on' => $monthStart->format('Y-m-d'), 'kind' => 'tools', 'title' => $title, 'amount' => $usd, 'currency' => 'USD', 'rate' => $rate, 'renews_on' => $d($renew)]);
+        $ins('expenses', ['spent_on' => $monthStart->format('Y-m-d'), 'kind' => 'tools', 'title' => $title, 'amount' => $usd, 'currency' => 'USD', 'rate' => $rate, 'renews_on' => $d($renew), 'paid_with' => 'Card', 'note' => 'Monthly plan']);
     }
     foreach ([1, 2, 3] as $back) {
         $m = $monthStart->modify("-$back months");
@@ -199,11 +215,11 @@ function seed_demo(PDO $pdo): void
     ] as [$topic, $status, $day, $imp, $react]) {
         $ins('li_posts', ['topic' => $topic, 'status' => $status, 'post_on' => $d($day), 'impressions' => $imp, 'reactions' => $react]);
     }
-    foreach (['reachouts' => 8, 'followups' => 3, 'comments' => 6, 'teardowns' => 1] as $metric => $count) {
+    foreach (['reachouts' => 8, 'followups' => 2, 'teardowns' => 1] as $metric => $count) {
         $ins('li_daily', ['day' => $d(0), 'metric' => $metric, 'count' => $count]);
     }
     for ($back = 1; $back <= 13; $back++) {
-        foreach (['reachouts' => 10, 'followups' => 4, 'comments' => 8, 'teardowns' => 1] as $metric => $base) {
+        foreach (['reachouts' => 10, 'followups' => 4, 'teardowns' => 1] as $metric => $base) {
             $ins('li_daily', ['day' => $d(-$back), 'metric' => $metric, 'count' => max(0, $base - ($back * 3) % 5)]);
         }
     }

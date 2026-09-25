@@ -8,6 +8,7 @@ $attention = attention_items();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf" content="<?= e(csrf_token()) ?>">
 <meta name="base" content="<?= e(base_path()) ?>">
+<meta name="today" content="<?= e(today()) ?>">
 <meta name="sprite" content="<?= e(asset('icons.svg')) ?>">
 <meta name="timezones" content="<?= e(setting('timezone', 'America/Los_Angeles') . '|' . setting('second_timezone', 'Asia/Karachi')) ?>">
 <title><?= e($page['title']) ?> · Workflow</title>

@@ -20,7 +20,7 @@ DirectoryIndex index.php
 
 <IfModule mod_headers.c>
   # Versioned URLs (?v=) are cached for a year; anything else is revalidated.
-  <FilesMatch "\.(css|js|svg|woff2|png|webp)$">
+  <FilesMatch "\.(css|js|svg|woff2|png|jpg|webp)$">
     Header set Cache-Control "no-cache"
     <If "%{QUERY_STRING} =~ /(^|&)v=/">
       Header set Cache-Control "public, max-age=31536000, immutable"

@@ -39,9 +39,9 @@ CREATE TABLE IF NOT EXISTS figma_projects (
   kind ENUM('client','portfolio') NOT NULL DEFAULT 'client',
   figma_url VARCHAR(500) NOT NULL DEFAULT '',
   due_on DATE NULL,
-  status ENUM('active','review','done','paused') NOT NULL DEFAULT 'active',
-  screens_total INT NOT NULL DEFAULT 0,
-  screens_done INT NOT NULL DEFAULT 0,
+  source ENUM('upwork','direct','self') NOT NULL DEFAULT 'upwork',
+  note VARCHAR(255) NOT NULL DEFAULT '',
+  status ENUM('active','review','revisions','done','paused') NOT NULL DEFAULT 'active',
   last_opened_at DATETIME NULL,
   position INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL
@@ -121,6 +121,7 @@ CREATE TABLE IF NOT EXISTS expenses (
   currency ENUM('USD','PKR') NOT NULL DEFAULT 'USD',
   rate DECIMAL(10,2) NOT NULL,
   quantity INT NULL,
+  paid_with VARCHAR(40) NOT NULL DEFAULT '',
   renews_on DATE NULL,
   note VARCHAR(255) NOT NULL DEFAULT '',
   KEY spent (spent_on)
@@ -182,7 +183,7 @@ CREATE TABLE IF NOT EXISTS li_posts (
 
 CREATE TABLE IF NOT EXISTS li_daily (
   day DATE NOT NULL,
-  metric ENUM('reachouts','followups','comments','teardowns') NOT NULL,
+  metric ENUM('reachouts','followups','teardowns') NOT NULL,
   count INT NOT NULL DEFAULT 0,
   PRIMARY KEY (day, metric)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -218,6 +219,6 @@ INSERT IGNORE INTO settings (k, v) VALUES
   ('income_goal', '10000'),
   ('work_start', '18:00'),
   ('work_end', '02:00'),
-  ('li_targets', '{"reachouts":10,"followups":5,"comments":10,"teardowns":2}'),
+  ('li_targets', '{"reachouts":10,"followups":4,"teardowns":1,"posts":1}'),
   ('connects_left', '0'),
   ('anthropic_key', '');

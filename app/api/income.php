@@ -39,3 +39,16 @@ function api_income_paid(): array
     update('income', (int) in_int('id'), ['status' => 'paid', 'received_on' => today(), 'due_on' => null]);
     return [];
 }
+
+/** Late invoice: add a follow-up task due today. */
+function api_income_remind(): array
+{
+    $inv = row('SELECT client, amount, currency, rate FROM income WHERE id = ?', [in_int('id')]) ?? fail('That invoice no longer exists.');
+    $id = task_save([
+        'title' => 'Chase invoice: ' . $inv['client'] . ', ' . usd(to_usd($inv['amount'], $inv['currency'], $inv['rate'])),
+        'notes' => 'Invoice is late. Send a friendly reminder.',
+        'category_id' => null, 'status' => 'todo', 'priority' => 'urgent', 'important' => 1, 'urgent' => 1,
+        'start_on' => today(), 'due_on' => today(), 'due_time' => null, 'est_minutes' => 15, 'project_id' => null,
+    ], [], null);
+    return ['task' => $id];
+}

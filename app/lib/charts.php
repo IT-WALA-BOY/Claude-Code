@@ -13,7 +13,7 @@ function nice_step(float $value): float
         return 1;
     }
     $mag = 10 ** floor(log10($value));
-    foreach ([1, 2, 2.5, 5, 10] as $step) {
+    foreach ([1, 2, 2.5, 4, 5, 10] as $step) {
         if ($step * $mag >= $value) {
             return $step * $mag;
         }
@@ -24,14 +24,15 @@ function nice_step(float $value): float
 /**
  * Vertical stacked bars with rounded segments.
  * $bars: [label, segments: [[value, class, name]], tip (html), state ('future'|'short'|''), short (value)]
- * $opts: max, ticks (count), format (callable), line ([value, label]), height (px)
+ * $opts: max, ticks (count), format (callable), line ([value, label]), height (px), grouped (bars side by side)
  */
 function bar_chart(array $bars, array $opts = []): string
 {
     $format = $opts['format'] ?? 'usd_short';
     $totals = array_map(fn ($b) => array_sum(array_column($b['segments'], 0)) + ($b['short'] ?? 0), $bars);
     $ticks = $opts['ticks'] ?? 3;
-    $max = $opts['max'] ?? nice_step(max([...$totals, $opts['line'][0] ?? 0, 1]) / $ticks) * $ticks;
+    // 5% headroom so the tallest bar or the goal line never touches the top.
+    $max = $opts['max'] ?? nice_step(max([...$totals, $opts['line'][0] ?? 0, 1]) * 1.05 / $ticks) * $ticks;
     $height = $opts['height'] ?? 200;
 
     $html = '<div class="vchart" style="--h:' . $height . 'px">';
@@ -47,19 +48,21 @@ function bar_chart(array $bars, array $opts = []): string
         [$lineValue, $lineLabel] = $opts['line'];
         $html .= '<div class="vchart-line" style="bottom:' . round(min(1, $lineValue / $max) * 100, 3) . '%"><span>' . e($lineLabel) . '</span></div>';
     }
+    $grouped = !empty($opts['grouped']);
     $html .= '<div class="vchart-bars">';
     foreach ($bars as $bar) {
         $state = $bar['state'] ?? '';
         $html .= '<div class="vchart-col' . ($state ? ' is-' . e($state) : '') . '"' . attrs(['data-tip' => $bar['tip'] ?? null]) . '>';
-        $html .= '<div class="vchart-stack">';
+        $html .= '<div class="vchart-stack' . ($grouped ? ' is-grouped' : '') . '">';
         if ($state === 'future') {
             $html .= '<b class="seg seg-future" style="height:40%"></b>';
         }
         if (!empty($bar['short'])) {
             $html .= '<b class="seg seg-short" style="height:' . round($bar['short'] / $max * 100, 3) . '%"></b>';
         }
-        foreach (array_reverse($bar['segments']) as [$value, $class]) {
-            if ($value > 0) {
+        // Stacks draw top segment first; grouped bars stand side by side in their given order.
+        foreach ($grouped ? $bar['segments'] : array_reverse($bar['segments']) as [$value, $class]) {
+            if ($value > 0 || $grouped) {
                 $html .= '<b class="seg ' . e($class) . '" style="height:' . round($value / $max * 100, 3) . '%"></b>';
             }
         }
@@ -95,7 +98,7 @@ function donut(array $segments, int $size = 180, int $stroke = 22, string $cente
         $offset += $len;
     }
     $svg .= '</svg>';
-    return '<div class="donut-wrap" style="width:' . $size . 'px;height:' . $size . 'px">' . $svg
+    return '<div class="donut-wrap" style="--size:' . $size . 'px">' . $svg
         . ($center !== '' ? '<div class="donut-center"><b>' . e($center) . '</b><span>' . e($sub) . '</span></div>' : '') . '</div>';
 }
 

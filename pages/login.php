@@ -76,7 +76,7 @@ header('Cache-Control: no-store');
   <aside class="auth-preview" aria-hidden="true">
     <p class="t-caps">Your night at a glance</p>
     <p class="auth-headline">Tasks, income pace, LinkedIn follow-ups and study goals in one calm place.</p>
-    <img src="<?= e(asset('img/preview.png')) ?>" alt="" width="1200" height="800" decoding="async">
+    <img src="<?= e(asset('img/preview.jpg')) ?>" alt="" width="1200" height="800" decoding="async">
   </aside>
 </body>
 </html>

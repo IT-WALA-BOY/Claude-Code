@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 $counts = task_counts();
-$openChange = task_open_change($counts['open']);
+$openChange = task_open_change();
 $income = income_month();
 $weeks = income_weeks();
 $spend = spend_month();
@@ -40,7 +40,7 @@ $dueCats = array_unique(array_filter(array_column($due, 'cat_name')));
 <div class="grid grid-4">
   <?= kpi_card(
       'list-todo', 'Pending tasks', (string) $counts['open'],
-      trend_chip($openChange, signed_pct($openChange), false),
+      trend_chip((float) $openChange, ($openChange > 0 ? '+' : '') . $openChange . ' this week', false),
       '<b class="' . ($counts['overdue'] ? 'tone-negative' : '') . '">' . $counts['overdue'] . '</b> overdue · ' . $counts['today'] . ' due today',
       url('tasks')
   ) ?>
