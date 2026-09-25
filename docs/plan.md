@@ -1,4 +1,16 @@
-# Personal Workflow Dashboard — Plan
+# Personal Workflow Dashboard: Plan
+
+## Update after user context (Sep 2026)
+The user shared their context. Only these parts change the dashboard:
+- **Clock:** the app runs on **US Pacific time** (`America/Los_Angeles`). "Today", due dates, the schedule and monthly rollups all follow Pacific days. The user works night shift in Pakistan to match US hours. Setting: `timezone`, default `America/Los_Angeles`.
+- **Currency:** USD is the main currency, and **PKR** is the local currency for daily expenses (exchange rate set in Settings).
+- **LinkedIn prospect stages** follow the user's funnel: Shortlisted → Connected → Teardown sent → Replied → Paid audit → Redesign pitch → Won / Lost.
+  - Prospect fields: market (US / UK), industry (B2B, SaaS, service, medical), and a note on why the lead looks neglected.
+  - The daily LinkedIn time budget is 1 to 1.5 h, which goes into the schedule maker as a default block.
+- **UI copy:** direct and short. Never use em dashes. The design must not look generic or AI-made.
+- The user declined the suggested extras (Upwork proposal tracker, habits, savings goal, fee/net income). Scope stays as below.
+- Save the relevant parts of the context in `docs/context.md`. Leave out personal details that don't affect the dashboard.
+- Next: the user sends design references, and only then do we move to Figma.
 
 ## Context
 The user is a freelance UI/UX designer who works on Upwork, does LinkedIn outreach, designs in Figma, and is self-studying (e.g. the CXL mini degree). They need one private dashboard to track tasks, expenses, goals, outreach and income. At the moment this work is spread across notes and memory.
