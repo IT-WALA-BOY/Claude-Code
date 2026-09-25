@@ -48,5 +48,8 @@
     "01 Overview v2": "27:415",
     "01 Overview v1 (previous)": "19:530"
   },
-  "iconsNote": "51 Lucide icon components named Icon/<lucide-name> inside DS \u00b7 04 Icons (14:779)"
+  "iconsNote": "61 icon components (Lucide + custom linkedin-square) named Icon/<name> inside DS \u00b7 04 Icons (14:779)",
+  "optionsBoards": {
+    "LinkedIn icon and Categories": "33:964"
+  }
 }
