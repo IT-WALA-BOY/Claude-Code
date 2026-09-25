@@ -1,0 +1,47 @@
+{
+  "file": "MpJESdIHTiE4uCqCdcnbi6",
+  "accent": "#3D4EF5 (blue/500). Primary button = black (bg/inverse).",
+  "font": "Inter in Figma (Inter Display not loadable in cloud); bound to Typography/font/family",
+  "collections": {
+    "Primitives": "VariableCollectionId:10:414",
+    "Color": "VariableCollectionId:10:459",
+    "Dimensions": "VariableCollectionId:10:522",
+    "Typography": "VariableCollectionId:10:534"
+  },
+  "pages": {
+    "designSystem": "12:414"
+  },
+  "iconHolder": "12:415",
+  "components": {
+    "Button": "15:457",
+    "IconButton": "15:469",
+    "Checkbox": "15:480",
+    "Badge": "15:500",
+    "CategoryPill": "15:523",
+    "PriorityPill": "15:542",
+    "TrendChip": "15:555",
+    "Avatar": "15:560",
+    "SearchField": "16:443",
+    "Segment": "16:453",
+    "SegmentedControl": "16:461",
+    "NavItem": "16:489",
+    "Sidebar": "16:609",
+    "StatCard": "17:525",
+    "AgendaItem": "17:580",
+    "AttentionItem": "17:620",
+    "ProgressRow": "17:652",
+    "TaskRow": "17:684"
+  },
+  "docFrames": {
+    "cover": "14:418",
+    "color": "14:424",
+    "typography": "14:664",
+    "spacing": "14:725",
+    "icons": "14:779",
+    "components": "15:419"
+  },
+  "screens": {
+    "01 Overview": "19:530"
+  },
+  "iconsNote": "51 Lucide icon components named Icon/<lucide-name> inside DS \u00b7 04 Icons (14:779)"
+}
