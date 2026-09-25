@@ -7,8 +7,8 @@ See [docs/plan.md](docs/plan.md) for the full plan and roadmap.
 
 ## Status
 - [x] Plan
-- [ ] Design system
-- [ ] Figma pilot (Overview screen)
-- [ ] Key Figma screens
+- [x] Design system
+- [x] Figma pilot (Overview screen)
+- [x] Figma screens (all 14)
 - [ ] Build
 - [ ] Package for deploy

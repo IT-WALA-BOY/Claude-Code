@@ -105,6 +105,12 @@ Height 36 (Medium) or 32 (Small), horizontal padding 14 / 10, sentence-case labe
 - Dates: `24 Sep`, and add the weekday in headers.
 - The app clock is **US Pacific**. The header also shows the local time in Depalpur (PKT).
 
+## Forms
+
+- Field: 40h control, radius 10, label above (Meta/Medium), helper below. Focus is a blue border plus the soft ring. Error is a red border and red helper.
+- Toggles, checkboxes and selected option cards are black when on, never blue.
+- A modal holds the only Primary button; the page behind is dimmed with `bg/scrim`.
+
 ## Required states
 
 Every data surface needs 4 states: empty (one sentence + one action), loading (a skeleton in the shape of the content), error (plain words + retry), and populated with realistic data.
@@ -122,8 +128,18 @@ Every data surface needs 4 states: empty (one sentence + one action), loading (a
 | Tasks · Board | see every task by status and drag cards between To do, In progress, Review and Done |
 | Tasks · Timeline | see what runs when and drag bars (or their edges) to reschedule |
 | Schedule | plan tonight and this week on the night-shift window, and accept the schedule maker's suggestions |
+| Goals | see each long goal's pace, course by course, and push its daily block into Schedule |
+| Goals · Breakdown wizard | turn a big goal into sub-goals and a daily time block by answering a few questions |
+| LinkedIn | hit today's outreach targets and move leads from teardown to paid audit to redesign |
+| Income | see money in against the $10K goal, what's pending, and chase late invoices |
+| Expenses | see where money goes (daily costs, Connects, tools) and what renews next |
+| Buy list | decide what to buy next by importance and urgency, and mark items bought |
+| Figma projects | track client and portfolio design work and jump into the Figma file |
+| Analytics | see trends in tasks, time, goals and workload with the rounded chart styles |
+| Settings | set clocks, currency, targets, the optional API key, and account security |
+| Sign in | get into the single admin account |
 
-Figma: page `🗒️ Dashboard screens`, grouped in sections `01 · Dashboard`, `02 · Tasks`, `03 · Schedule`, and `Archive and options`.
+Figma: page `🗒️ Dashboard screens`, grouped in 10 sections from `00 · Sign in` to `10 to 11 · Analytics and settings`, plus `Archive and options`.
 
 Sidebar picks: LinkedIn uses the Lucide `megaphone` icon. Categories use tinted icon tiles (LinkedIn megaphone, Upwork briefcase-business, Self study graduation-cap, Figma figma) with task counts.
 

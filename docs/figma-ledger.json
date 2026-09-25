@@ -35,7 +35,11 @@
     "TaskRow": "17:684",
     "KPICard": "26:937",
     "SidebarV1": "16:609",
-    "TaskCard": "35:1257"
+    "TaskCard": "35:1257",
+    "Field": "41:2233",
+    "Toggle": "41:2240",
+    "OptionCard": "41:2253",
+    "LeadCard": "44:2679"
   },
   "docFrames": {
     "cover": "14:418",
@@ -46,13 +50,23 @@
     "components": "15:419"
   },
   "screens": {
+    "00 Sign in": "55:4151",
     "01 Overview": "27:415",
     "02.1 Tasks \u00b7 Board": "36:1065",
     "02.2 Tasks \u00b7 Timeline": "37:1761",
     "03 Schedule": "38:1948",
+    "04.1 Goals": "42:2141",
+    "04.2 Goals \u00b7 Breakdown wizard": "43:2332",
+    "05 LinkedIn": "45:2576",
+    "06 Income": "48:2995",
+    "07 Expenses": "49:3184",
+    "08 Buy list": "50:3354",
+    "09 Figma projects": "51:3539",
+    "10 Analytics": "52:3743",
+    "11 Settings": "54:3898",
     "Overview v1 (previous)": "19:530"
   },
-  "iconsNote": "61 icon components (Lucide + custom linkedin-square) named Icon/<name> inside DS \u00b7 04 Icons (14:779)",
+  "iconsNote": "63 icon components (Lucide + custom linkedin-square) named Icon/<name> inside DS \u00b7 04 Icons (14:779)",
   "optionsBoards": {
     "LinkedIn icon and Categories": "33:964"
   },
@@ -241,23 +255,130 @@
           1000,
           290
         ]
+      ],
+      "year2026": {
+        "Jan": 3200,
+        "Feb": 4100,
+        "Mar": 3650,
+        "Apr": 5020,
+        "May": 4480,
+        "Jun": 5900,
+        "Jul": 6300,
+        "Aug": 7450,
+        "Sep": 6240,
+        "total": 46340
+      },
+      "pending": [
+        [
+          "Fruits Au Travail",
+          480,
+          "sent 19 Sep, 5 days late"
+        ],
+        [
+          "Qualitas milestone 4",
+          520,
+          "in escrow, due 1 Oct"
+        ]
       ]
     },
     "spend": {
       "september": 412,
-      "connects": 90
+      "daily": 258,
+      "dailyPKR": 72800,
+      "connects": 90,
+      "tools": 64,
+      "rate": 282,
+      "connectsLeft": 12
     },
     "linkedin": {
       "followUpsDue": 4,
       "overdue": 2,
-      "pipeline": 11
+      "pipeline": {
+        "Shortlisted": 3,
+        "Connected": 2,
+        "Teardown sent": 2,
+        "Replied": 2,
+        "Paid audit": 1,
+        "Redesign pitch": 1,
+        "total": 11
+      }
     },
-    "focusHours": 88.5
+    "focusHours": 88.5,
+    "goals": [
+      [
+        "CXL mini degree",
+        "24 of 64 h",
+        "due 24 Oct",
+        "On pace"
+      ],
+      [
+        "Mobile app case study",
+        "2 of 5 screens",
+        "due 30 Sep",
+        "Behind"
+      ],
+      [
+        "LinkedIn posts in September",
+        "5 of 12",
+        "due 30 Sep",
+        "Behind"
+      ],
+      [
+        "Portfolio site",
+        "3 of 8 pages",
+        "due 15 Oct",
+        "On pace"
+      ],
+      [
+        "New Upwork reviews in September",
+        "1 of 3",
+        "due 30 Sep",
+        "At risk"
+      ]
+    ],
+    "buyList": [
+      [
+        "Laptop charger 65W",
+        "Rs 9,500",
+        "Important+Urgent"
+      ],
+      [
+        "UPS battery",
+        "Rs 14,000",
+        "Important+Urgent"
+      ],
+      [
+        "Ergonomic chair",
+        "Rs 45,000",
+        "Important"
+      ],
+      [
+        "27 inch 4K monitor",
+        "Rs 68,000",
+        "Important"
+      ],
+      [
+        "Phone screen protector",
+        "Rs 1,200",
+        "Urgent"
+      ],
+      [
+        "Mechanical keyboard",
+        "Rs 18,000",
+        "Neither"
+      ]
+    ]
   },
   "sections": {
-    "01 \u00b7 Dashboard": "39:2752",
-    "02 \u00b7 Tasks": "39:2753",
-    "03 \u00b7 Schedule": "39:2754",
-    "Archive and options": "39:2755"
+    "00 \u00b7 Sign in": "56:5068",
+    "01 \u00b7 Dashboard": "56:5069",
+    "02 \u00b7 Tasks": "56:5070",
+    "03 \u00b7 Schedule": "56:5071",
+    "04 \u00b7 Goals": "56:5072",
+    "05 \u00b7 LinkedIn": "56:5073",
+    "06 to 08 \u00b7 Money": "56:5074",
+    "09 \u00b7 Figma projects": "56:5075",
+    "10 to 11 \u00b7 Analytics and settings": "56:5076",
+    "Archive and options": "56:5077"
   }
 }
