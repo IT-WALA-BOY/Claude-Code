@@ -1,5 +1,5 @@
 /* =============================================================================
- * helpers.js — paste only the functions a use_figma call needs.
+ * helpers.js: paste only the functions a use_figma call needs.
  * Every use_figma call is a fresh script: re-declare what you use each time.
  * Shared by /design-system and /dashboard-design-system.
  * ========================================================================== */
@@ -117,7 +117,7 @@ async function ensureCollection(name, modeNames) {
   return c;
 }
 
-/* values: { Desktop: 56, Mobile: 40 } or { default: value } — value may be a
+/* values: { Desktop: 56, Mobile: 40 } or { default: value }: value may be a
  * number, string, boolean, {r,g,b,a} or a Variable to alias. */
 async function upsertVariable(collection, name, type, values, { scopes = [], description } = {}) {
   const existing = (await figma.variables.getLocalVariablesAsync()).find(v => v.name === name && v.variableCollectionId === collection.id);
@@ -200,7 +200,7 @@ function gridVariants(set, columns, gapX = 32, gapY = 32, pad = 40) {
 /* ---------------------------------------------------------------------------
  * 5. Icons (Phosphor Bold from the Koala UI Free kit)
  * ------------------------------------------------------------------------- */
-/* CALL A — run with fileKey "CfPwhOt0XCKiQLi2rQjcnN" (Koala UI Free). ≤ 14 icons.
+/* CALL A: run with fileKey "CfPwhOt0XCKiQLi2rQjcnN" (Koala UI Free). ≤ 14 icons.
 const WANT = { 'arrow-right': 'ArrowRight', menu: 'List', cart: 'ShoppingCart' };
 const page = figma.root.children.find(p => p.name.includes('Icons'));
 await figma.setCurrentPageAsync(page);
@@ -217,7 +217,7 @@ for (const [key, phosphor] of Object.entries(WANT)) {
 return { missing, icons };
 */
 
-/* CALL B — run in the target file with the bodies returned by call A. */
+/* CALL B: run in the target file with the bodies returned by call A. */
 async function createIconComponent(key, src, body, size, colorName, parent) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">${body.replace(/<path /g, '<path fill="#000000" ')}</svg>`;
   const tmp = figma.createNodeFromSvg(svg);

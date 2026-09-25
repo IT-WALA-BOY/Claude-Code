@@ -115,10 +115,15 @@ function csrf_token(): string
     return $_SESSION['csrf'] ??= bin2hex(random_bytes(32));
 }
 
-function check_csrf(): void
+function csrf_ok(): bool
 {
     $sent = $_SERVER['HTTP_X_CSRF'] ?? ($_POST['csrf'] ?? '');
-    if (!is_string($sent) || !hash_equals(csrf_token(), $sent)) {
-        str_starts_with(route_path(), 'api/') ? json_out(['error' => 'Session expired. Reload the page.'], 419) : fail('Session expired. Reload the page.');
+    return is_string($sent) && hash_equals(csrf_token(), $sent);
+}
+
+function check_csrf(): void
+{
+    if (!csrf_ok()) {
+        str_starts_with(route_path(), 'api/') ? json_out(['error' => 'Session expired. Reload the page.'], 403) : fail('Session expired. Reload the page.');
     }
 }

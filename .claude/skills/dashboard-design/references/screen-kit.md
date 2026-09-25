@@ -1,8 +1,8 @@
-# Screen kit — discovery, prelude, per-screen call template
+# Screen kit: discovery, prelude, per-screen call template
 
 ## 1. Discovery call (Step 0, read-only)
 
-Run once on the target file. Replace `FLAGSHIP_NAME_PART` with a distinctive part of the flagship frame name (e.g. `Dashboard —`).
+Run once on the target file. Replace `FLAGSHIP_NAME_PART` with a distinctive part of the flagship frame name (e.g. `Dashboard ·`).
 
 ```js
 const pages = figma.root.children.map(p => ({ id: p.id, name: p.name }));

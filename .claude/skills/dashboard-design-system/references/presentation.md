@@ -1,4 +1,4 @@
-# Presentation — Koala UI style (multi-page)
+# Presentation: Koala UI style (multi-page)
 
 ## Pages (in this order)
 ```

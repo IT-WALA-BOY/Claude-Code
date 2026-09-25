@@ -77,7 +77,7 @@ function handle_exception(Throwable $e): void
     if ($isApi) {
         json_out(['error' => $message], $e instanceof UserError ? 422 : 500);
     }
-    http_response_code(500);
+    http_response_code($e instanceof UserError ? 400 : 500);
     echo '<!doctype html><meta charset="utf-8"><title>Error</title><p style="font:14px system-ui;padding:40px">' . e($message) . '</p>';
 }
 

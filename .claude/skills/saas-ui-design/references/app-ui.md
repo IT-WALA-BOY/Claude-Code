@@ -1,4 +1,4 @@
-# In-app UI — dashboards, tables, forms, panels
+# In-app UI: dashboards, tables, forms, panels
 
 Everything here assumes the core rule from SKILL.md: color and visual weight are information, not decoration.
 
@@ -10,18 +10,18 @@ For each screen, write one sentence: *"The user came here to ____."* Then:
 
 - Everything that serves that sentence stays.
 - Everything that does not, moves to the page where it belongs or is deleted.
-- A page called "Guests" is a list of guests. It is not a place for total-guests-this-year, revenue charts, or team analytics — those live on the pages named after them.
+- A page called "Guests" is a list of guests. It is not a place for total-guests-this-year, revenue charts, or team analytics: those live on the pages named after them.
 
-A second intent justifies more functionality. Someone who wants a holiday but does not know where is *browsing*, not searching — that is what filters are for. Intent expanding is the only valid reason for the surface to expand.
+A second intent justifies more functionality. Someone who wants a holiday but does not know where is *browsing*, not searching: that is what filters are for. Intent expanding is the only valid reason for the surface to expand.
 
 ## 2. Color system
 
 - **Base:** near-white surfaces (`#FCFCFC`–`#FFFFFF`), hairline borders (`1px`, ~8% black), text in two or three greys. Dark mode: near-black surfaces, same discipline.
 - **Accent:** exactly one. Used for the primary action and nothing else.
-- **Semantic:** green / amber / red reserved for status. Keep them muted — a pale tint background with a thin border of the same hue, not a saturated block.
+- **Semantic:** green / amber / red reserved for status. Keep them muted: a pale tint background with a thin border of the same hue, not a saturated block.
 - **Data carries the color.** Charts, status pills, category dots. Chrome stays grey.
 
-Action hierarchy inside a single view — this is how a well-designed app steers the user without instructions:
+Action hierarchy inside a single view: this is how a well-designed app steers the user without instructions:
 
 | Role | Treatment | Example |
 |---|---|---|
@@ -33,34 +33,34 @@ One primary per view. If two things look equally primary, neither is.
 
 ## 3. Density and repeated components
 
-AI is worst at dense repeated components — a list of cards is where it dumps every button, chip, and timestamp it can think of. Compress with these moves:
+AI is worst at dense repeated components: a list of cards is where it dumps every button, chip, and timestamp it can think of. Compress with these moves:
 
 - Collapse a row of action buttons into a single `⋯` overflow menu. Keep at most one inline action if it is used constantly.
 - Replace text chips with icons, or with one small colored dot plus plain text ("● In progress").
 - Push the number that actually matters to the right edge where the eye lands.
-- Do not double-encode. If status is a colored dot, priority should be the colored thing *or* the dot — not both, or the row turns into confetti again.
+- Do not double-encode. If status is a colored dot, priority should be the colored thing *or* the dot: not both, or the row turns into confetti again.
 - Same information, roughly a third of the noise. That is the target.
 
-Metadata pattern: replace field labels with icons. A building icon before the company name, a calendar icon before the date, a currency symbol before the amount — no "Company:", "Date:", "Value:" prefixes.
+Metadata pattern: replace field labels with icons. A building icon before the company name, a calendar icon before the date, a currency symbol before the amount: no "Company:", "Date:", "Value:" prefixes.
 
 ## 4. Layout and containers
 
-- **Choose the container by content volume.** A four-field form does not need a slide-out panel with acres of dead space — a centered modal fits it. A long editable record does not belong in a modal — use a full page or a wide drawer.
+- **Choose the container by content volume.** A four-field form does not need a slide-out panel with acres of dead space: a centered modal fits it. A long editable record does not belong in a modal: use a full page or a wide drawer.
 - **Tables beat card grids** for anything the user scans, compares, or filters. Cards are for genuinely visual items.
 - **One spacing scale** (4 / 8 / 12 / 16 / 24 / 32 / 48). Every gap is a step on it.
-- **Sidebar:** navigation and account state only. Persistent, useful context — remaining credits, current plan, workspace — belongs at the bottom of it where it is always visible without competing.
+- **Sidebar:** navigation and account state only. Persistent, useful context (remaining credits, current plan, workspace) belongs at the bottom of it where it is always visible without competing.
 - **Filters** sit above the data they filter, with a legend if any filter is non-obvious.
 
 ## 5. Typography
 
 Define once, then never deviate:
 
-- Page title — one size, bold.
-- Section label — one size, medium weight, muted; pick uppercase-with-tracking *or* sentence case and use it everywhere.
-- Body — one size.
-- Secondary/meta — one size, muted grey.
+- Page title: one size, bold.
+- Section label: one size, medium weight, muted; pick uppercase-with-tracking *or* sentence case and use it everywhere.
+- Body: one size.
+- Secondary/meta: one size, muted grey.
 
-Four roles is usually enough for an entire product. Hierarchy comes from size, weight, color, and space — in that order of reliability.
+Four roles is usually enough for an entire product. Hierarchy comes from size, weight, color, and space: in that order of reliability.
 
 ## 6. Design for ugly data
 

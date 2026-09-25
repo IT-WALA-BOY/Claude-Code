@@ -1,4 +1,4 @@
-# The flagship dashboard — measurement by measurement
+# The flagship dashboard: measurement by measurement
 
 This is the layout the Al Qafla owner called "extremely high end". It is built only from tokens and library instances; the chart is drawn with `areaChart()` from helpers.js.
 
@@ -16,7 +16,7 @@ Map the slots:
 | Breakdown | Profit by service | Revenue by plan | Revenue by category |
 
 ## 1. Frame
-`Dashboard — <Viewer> · 1440`: horizontal auto layout, width 1440, fill `bg/canvas`, min height 1024.
+`Dashboard · <Viewer> · 1440`: horizontal auto layout, width 1440, fill `bg/canvas`, min height 1024.
 Children: **Sidebar** (264, fill container height) · **Main** (fill, vertical, padding 32, gap 24).
 
 ## 2. Sidebar (264 wide, `bg/surface`, right hairline)
@@ -38,7 +38,7 @@ Vertical, padding 20 top/bottom and 16 sides, gap 24.
   - Secondary Button with `calendar` icon, "Last 30 days".
   - **Primary Button** with `plus` icon: "New booking" (the only primary on the screen).
 
-## 4. Row 1 — performance (horizontal, gap 24)
+## 4. Row 1: performance (horizontal, gap 24)
 ### 4a. Hero card (fill ≈ 2/3): `bg/surface`, `border/default`, radius lg, `Shadow/Card`, padding 24, gap 20
 - **Head** (SPACE_BETWEEN): title `Title/Section` "Gross profit" + sub-line `Meta/Regular` muted "Client charges − vendor cost · last 30 days" · Segmented Control Daily / Weekly / Monthly.
 - **Figure row** (gap 12, centre aligned): `Title/Display` "PKR 433,100" · trend chip (`bg/positive-soft`, radius full, padding 2/8, `trend-up` 14px + `Meta/Semibold` `text/positive` "12.4%") · `Meta/Regular` muted "vs PKR 385,300 the 30 days before". A falling metric uses `trend-down` + negative tokens.
@@ -56,7 +56,7 @@ Vertical, padding 20 top/bottom and 16 sides, gap 24.
 - **Block 2**: "Vendor payable" + "4 vendors" · `Title/Stat` · `Meta/Regular` "Next due 18 Sep · PIA Consolidators · PKR 96,000".
 - **Block 3**: "Collected today" + "3 receipts" · `Title/Stat` · `Meta/Regular` "Cash 30,000 · Bank transfer 20,000".
 
-## 5. Row 2 — work (horizontal, gap 24, top aligned)
+## 5. Row 2: work (horizontal, gap 24, top aligned)
 ### 5a. Main table card (fill ≈ 2/3, padding 0, clip)
 - **Head** (padding 20/24, SPACE_BETWEEN): title "Recent bookings" + sub-line "Every sale recorded at this branch · updated 2 min ago" · Segmented Control All / Tickets / Umrah / Visa + Secondary Icon Button `filter`.
 - **Columns**: Booking (two-line: name `Body/Semibold`, sub-line `Meta` "Ticketing · PK 301 · LHE–JED · 4 passengers") · Client · Date (two-line: date + time) · Client charge (Amount, right) · Status (Badge) · actions (`more`).
@@ -71,7 +71,7 @@ Vertical, padding 20 top/bottom and 16 sides, gap 24.
 - **Breakdown card**: `Title/Section` "Profit by service" + "Last 30 days" muted. Each row is a label `Body/Medium` with the right-aligned value `Meta/Regular` "PKR 208,000 · 48%", over a 6h bar (radius full) on a `bg/muted` track. **Only the top row's bar is `bg/accent`**; the others use `icon/secondary`.
 
 ## 6. Optional overlay
-A default Toast centred 24px above the bottom edge ("Booking saved — 4 passengers. PKR 50,000 received; balance PKR 280,000."), absolute positioned.
+A default Toast centred 24px above the bottom edge ("Booking saved: 4 passengers. PKR 50,000 received; balance PKR 280,000."), absolute positioned.
 
 ## 7. Checks before calling it done
 - [ ] Count the accent touches: 5 or fewer (CTA, brand mark, active nav icon, urgent count, chart line or top breakdown bar). The notification dot counts as part of the bell.

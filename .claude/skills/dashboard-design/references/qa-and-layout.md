@@ -4,14 +4,14 @@
 
 - [ ] The header states the page's question in the context line; nothing on screen answers a different question.
 - [ ] Exactly one Primary button is live (overlay screens: the drawer or modal holds it).
-- [ ] `accentTouches()`: beyond the fixed shell touches (brand mark, active nav icon, urgent count, avatar initials, unread dot), the content has at most 2 — the primary CTA and one highlighted datum. Screens that embed a scaled product preview (sign-in showcase) are exempt inside the preview.
+- [ ] `accentTouches()`: beyond the fixed shell touches (brand mark, active nav icon, urgent count, avatar initials, unread dot), the content has at most 2: the primary CTA and one highlighted datum. Screens that embed a scaled product preview (sign-in showcase) are exempt inside the preview.
 - [ ] Nav item for this screen is Active; Dashboard is Default.
 - [ ] No clipped or overflowing text (`textOverflow()` empty); long meta lines wrap.
 - [ ] Cards in the same row have equal heights; columns align to the 24px gap.
 - [ ] Tables: amounts right-aligned; totals footer present; pagination explains the count; `⋯` actions column.
 - [ ] Colour only for state: owed red, credit green, overdue text red, running balances neutral, share bars neutral.
 - [ ] Numbers match the data bible and the other screens.
-- [ ] Empty / zero values shown as `0` or `—`, never blank.
+- [ ] Empty / zero values shown as `0` or "Not set", never blank.
 - [ ] Search placeholders fit on one line.
 
 ## Defects already found (and the fix that worked)
@@ -34,8 +34,14 @@
 | Swapped button icon rendered grey on an orange button | INSTANCE_SWAP resets the nested glyph colour | Re-colour the Icon glyphs after `setProperties` (`btn()` does it) |
 | Field in Error state kept the component's sample helper ("Enter an amount greater than zero.") | The Error variant's helper text layer isn't linked to the `Helper` property | Set the helper TEXT node's `characters` directly on the instance (load its font first) |
 | Checkbox label overlapped the next column | 2-column permission rows in a 368 panel with a long label | Keep labels ≤ 22 characters in 2-column lists ("See cost and profit"), or use one column |
+| Tooltip overlapped the chart bar it described | Absolute tooltip placed at a fixed offset | Place it beside the highlighted bar, above the tallest neighbour |
+| Sidebar categories looked "terrible without icons" (user feedback) | Plain text list | Tinted icon tiles (28px, category pastel bg + icon) with counts; decided with an A/B/C options board |
+| Nav icon for LinkedIn read wrong | Brand glyph in a neutral nav | A generic Lucide glyph (`megaphone`) picked from three options |
+| Due column clipped in a narrow table | Auto table layout with long titles | Fixed widths on the short columns; the title column truncates with an ellipsis |
+| Settings panel overflowed the frame | Fixed panel height | HUG content + `minHeight` on the main panel and the screen |
+| Stray icon instance left on a screen | Leftover from a swap | Final audit: list instances whose main component is an icon but whose parent is the screen frame |
 
-## Layout on the flagship page — flow sections (preferred)
+## Layout on the flagship page: flow sections (preferred)
 
 Screens go into one Figma Section per flow, with no documentation wrappers. `layoutFlowSections()`:
 
@@ -63,7 +69,7 @@ resolved.forEach((r, i) => {
 
 If screens were previously wrapped, move each screen into its section first, then delete the now-empty wrapper frames (only frames that contain a `Documentation container` child).
 
-## Legacy — documentation-wrapped layout (do not use for product screens)
+## Legacy: documentation-wrapped layout (do not use for product screens)
 
 Kept for reference only: the flagship documentation frame first, then every screen wrapped, in brief order, rows of 4, 160px gaps.
 
@@ -71,7 +77,7 @@ Kept for reference only: the flagship documentation frame first, then every scre
 // paste KIT + boot + primitives + wrapScreen from screen-kit.js
 const page = await boot();
 const ORDER = [ // [screenFrameId, title, description]
-  ['SCREEN_ID', 'Ledgers — Clients owe us', 'Who owes money, and how much? Balance overview with aging, balances table with totals.'],
+  ['SCREEN_ID', 'Ledgers · Clients owe us', 'Who owes money, and how much? Balance overview with aging, balances table with totals.'],
 ];
 const flagshipWrapper = await G('FLAGSHIP_WRAPPER_ID');
 const wrappers = [flagshipWrapper];

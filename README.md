@@ -1,7 +1,7 @@
 # Workflow Dashboard
 
 A private, single-admin dashboard for tasks, schedule, goals, LinkedIn outreach, Figma work, income, expenses and a buy list.
-Plain PHP 8 + MySQL with no build step. Deploys as a zip + `.sql` to Hostinger or XAMPP, and can sit next to a WordPress site in a subfolder.
+Plain PHP 8.1+ and MySQL/MariaDB with no build step. Deploys as a zip + `.sql` to Hostinger or XAMPP, and can sit next to a WordPress site in a subfolder.
 
 - Plan: [docs/plan.md](docs/plan.md)
 - Design rules: [docs/design-rules.md](docs/design-rules.md) (Figma: *Task Management Dashboard*, page "Dashboard screens")
@@ -31,4 +31,5 @@ Then open `http://127.0.0.1:8080/install.php` (needs a MySQL database). Tick "Lo
 - [x] Figma screens (all 14)
 - [x] Build (all screens, tested in the browser)
 - [x] Package for deploy (`sh tools/package.sh`)
-- [ ] Update the three design skills with what this project learned
+- [x] Run on XAMPP 8.2.12 following `docs/deploy.md` (install, all screens, phpMyAdmin export and import)
+- [x] Update the three design skills with what this project learned

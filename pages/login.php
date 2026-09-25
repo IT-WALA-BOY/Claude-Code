@@ -8,9 +8,10 @@ if (is_signed_in()) {
 $error = null;
 $username = '';
 if (is_post()) {
-    check_csrf();
     $username = trim((string) ($_POST['username'] ?? ''));
-    $error = attempt_sign_in($username, (string) ($_POST['password'] ?? ''), !empty($_POST['remember']));
+    $error = csrf_ok()
+        ? attempt_sign_in($username, (string) ($_POST['password'] ?? ''), !empty($_POST['remember']))
+        : 'The page was open too long. Sign in again.';
     if ($error === null) {
         redirect('');
     }

@@ -1,5 +1,5 @@
 /* =============================================================================
- * screen-kit.js — builder prelude for /dashboard-design
+ * screen-kit.js: builder prelude for /dashboard-design
  *
  * Paste into a use_figma call: section 1 (KIT, filled from the Step 0 discovery
  * call), section 2 (boot + primitives), and whichever builders the screen needs.
@@ -18,7 +18,7 @@
  * ========================================================================== */
 
 /* ---------------------------------------------------------------------------
- * 1. KIT — fill from the discovery call (values below are the Al Qafla file)
+ * 1. KIT: fill from the discovery call (values below are the Al Qafla file)
  * ------------------------------------------------------------------------- */
 const KIT = {
   pageId: '5:13',          // page that holds the flagship dashboard

@@ -3,7 +3,7 @@
 return [
     'db' => [
         'host' => 'localhost',
-        'name' => 'dashboard',
+        'name' => 'workflow',
         'user' => 'root',
         'pass' => '',
     ],

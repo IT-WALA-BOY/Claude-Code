@@ -1,4 +1,4 @@
-# Figma Plugin API gotchas (learned building the Al Qafla design system)
+# Figma Plugin API gotchas (learned building the Al Qafla and Workflow design systems)
 
 Read before writing `use_figma` scripts. Each item cost at least one failed or wrong call in production.
 
@@ -33,7 +33,9 @@ Read before writing `use_figma` scripts. Each item cost at least one failed or w
 - **Mode limits depend on the plan.** Starter plans allow one mode, so `collection.addMode()` throws. Detect it and use the fallback.
 - Frame mode toggle: `frame.setExplicitVariableModeForCollection(collection, modeId)`.
 - Text style variables: `style.setBoundVariable('fontSize' | 'lineHeight' | 'letterSpacing' | 'fontFamily' | 'fontStyle', variable)`. Wrap each call in try/catch and report failures. Line height and letter spacing bind as **pixels**.
-- Bound paint with transparency: `figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: {r:0,g:0,b:0}, opacity: 0.08 }, 'color', v)`; the opacity is kept.
+- **Paint opacity is dropped when a variable is bound** (observed repeatedly on the Workflow build: nav count tints, Gantt overlays). For translucency use layer `opacity`, or bind a variable whose value has alpha (`bg/scrim`).
+- **Stale raw colours on bound paints.** A bound paint keeps whatever raw `color` you passed; some renders and exports show that instead of the variable. Always pass the resolved value: `const r = v.resolveForConsumer(node).value; setBoundVariableForPaint({ type: 'SOLID', color: { r: r.r, g: r.g, b: r.b } }, 'color', v)`. Audit for paints whose raw colour differs from the resolved variable and re-set them.
+- **Same variable name in two collections** (`chart/ink` in Primitives and Color) makes a name map pick the wrong one and prints `#NANNANNAN`. Build the map preferring the semantic collection: `if (!V[v.name] || v.variableCollectionId === colorCollectionId) V[v.name] = v`.
 - Renaming a variable keeps its ID and every binding, so it's the safe way to evolve names.
 
 ## Components
@@ -51,3 +53,16 @@ Read before writing `use_figma` scripts. Each item cost at least one failed or w
 ## Sections
 - `figma.createSection()`, `section.appendChild(frame)` (child coords become section-relative), `section.resizeWithoutConstraints(w, h)`.
 - Stack sections by reading `max(y + height)` of the page's existing children.
+
+## More traps (Workflow Dashboard build)
+- **Appending into an instance throws.** To add a badge or unread dot to an instance, wrap the instance in a small frame and add the dot to the wrapper.
+- **Empty auto-layout frames default to 100×100.** A forgotten "Spacer" or empty "Head actions" frame silently adds 100px. Remove it, or resize its height to 1.
+- **Resize after changing sizing mode.** `resize()` after `primaryAxisSizingMode = 'AUTO'` freezes the size. Resize first, then set `'AUTO'`. A doc frame stuck at 114px tall was this.
+- **Cloned variants lose their text property references.** After cloning a variant (e.g. a Trend Chip tone), re-link the text: `textNode.componentPropertyReferences = { characters: 'Value#15:36' }`.
+- **`findOne` searches the whole subtree.** `body.findOne(n => n.name === 'Board')` matched a view-switch button called "Board". Use `body.children.find(...)` for direct children.
+- **A FILL child inside a HUG parent can explode.** A goals panel grew to 8758px wide. Set the wrapper `layoutSizingHorizontal = 'FILL'` inside a fixed-width parent.
+- **Tall content clips inside fixed panels.** Set the content wrapper to HUG and give the panel a `minHeight` instead of a fixed height.
+- **`maxLines` truncation is unreliable** on text with auto width. Shorten the copy instead, or set a fixed width plus `textTruncation = 'ENDING'`.
+- **Inline screenshots can look dim** (icons appear lighter). Trust `get_screenshot` (the real render) before "fixing" colours.
+- **Figma asset URLs may be blocked by the network proxy.** Use `get_screenshot` with the base64 response instead of downloading the PNG URL.
+- **Reorder before you delete.** Removing a parent before moving its children out destroys the children.

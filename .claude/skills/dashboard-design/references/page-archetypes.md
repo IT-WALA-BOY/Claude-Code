@@ -1,4 +1,4 @@
-# Page archetypes — measured from the Al Qafla build
+# Page archetypes: measured from the Al Qafla and Workflow builds
 
 All screens: frame 1440 wide (min height 1024, height hugs), `bg/canvas`, Sidebar 264 (fill height), Main padding 28 / 32 / 32 / 32 with gap 24 (content width 1112). Cards: `bg/surface`, 1px `border/default`, radius `radius/lg` (16), `Shadow/Card`, padding 24. Table cards use padding 0, clip content, and a head row padded 20/24. Side columns are 320–368 wide. Two-column body gap is 24.
 
@@ -9,7 +9,7 @@ Header row (every screen): SPACE_BETWEEN, centred. Left: optional back Icon Butt
 ## 1. Overview (flagship)
 Built by `/dashboard-design-system` → `dashboard-recipe.md`. Everything below must not copy its hero/position/attention composition.
 
-## 2. Balances list — e.g. Ledgers (clients owe us / we owe vendors)
+## 2. Balances list: e.g. Ledgers (clients owe us / we owe vendors)
 **Question:** who owes money, and how much?
 1. **Balance overview card** (horizontal, gap 32):
    - **Left block** (fixed ~620): label row ("Clients owe us" · "9 clients · 1 refund due") · `Title/Display` total + Negative badge with the risky slice ("PKR 62,000 older than 60 days") · aging bar (8h, three segments in `icon/secondary` / `text/warning` / `text/negative`, 2px gaps, widths proportional) · legend with 6px dots.
@@ -22,15 +22,15 @@ Built by `/dashboard-design-system` → `dashboard-recipe.md`. Everything below 
    - **Pagination row:** "Showing 1–7 of 9 clients · positive balance = client owes us".
 **Pitfalls:** tab icons turn orange when selected (hide them) · keep the placeholder short.
 
-## 3. Drawer over list — e.g. Client statement
+## 3. Drawer over list: e.g. Client statement
 Clone the list screen, then add an absolute Scrim (`bg/scrim`, full frame) and an absolute **Drawer** (720 wide, full height, right edge, `bg/surface`, left hairline, `Shadow/Menu`):
 1. **Head** (padding 20/24, bottom hairline): name `Title/Section` + Negative badge "Owes PKR 180,000" · sub-line (statement type · phone · since · branch) · Quiet Icon Buttons: print, history, close.
 2. **Summary strip** (`bg/subtle`, 4 equal blocks: Opening · Charged · Received · Balance, value `Title/Section`; only Balance is red).
 3. **Toolbar:** tabs "All lines · Charges · Payments" + Secondary Small date-range button.
-4. **Lines table:** Date (two-line) 150 · Particulars (two-line: what — who, detail · by whom) fill · Debit 92 R · Credit 92 R · Balance 104 R. **Running balances are neutral `Amount`**, not red. Footer: "Closing balance · 6 lines".
+4. **Lines table:** Date (two-line) 150 · Particulars (two-line: what, who, detail · by whom) fill · Debit 92 R · Credit 92 R · Balance 104 R. **Running balances are neutral `Amount`**, not red. Footer: "Closing balance · 6 lines".
 5. **Spacer** (fill), then the **Foot** (top hairline): ordering rule `Meta` muted · Secondary "Print statement" + **Primary "Record receipt"**.
 
-## 4. Form with sticky summary — e.g. New booking
+## 4. Form with sticky summary: e.g. New booking
 **Question:** record this sale correctly, fast.
 - **Header:** back button · "New booking" · "Ticketing · branch · draft autosaved 2 min ago" · Quiet "Discard" + Secondary "Save draft" (no primary here).
 - **Type tabs** under the header (Ticketing · Umrah package · Visa · …).
@@ -43,7 +43,7 @@ Clone the list screen, then add an absolute Scrim (`bg/scrim`, full frame) and a
   - **Payment-now card:** disabled fields show *why* ("Not needed for cash"), plus helper text for constraints.
   - **Summary card:** title + Draft badge · party block · divider · label/value lines (vendor cost, client charge, profit in `text/positive`, received) · divider · "Client still owes on this booking" `Title/Stat` · Status select · **full-width Primary "Save and print invoice"** · shortcut hint.
 
-## 5. Multi-section builder — e.g. Umrah package
+## 5. Multi-section builder: e.g. Umrah package
 **Question:** what does this package consist of, and what does it cost?
 - **Header:** back · name + status badge in the title row · a sub-line with id, package type, who created it and when services were added · Secondary "Print summary" + **Primary "Update booking"**.
 - **Body:** section rail (208) · content (fill) · totals column (320).
@@ -57,7 +57,7 @@ Clone the list screen, then add an absolute Scrim (`bg/scrim`, full frame) and a
   - **Passengers table:** two-line name · passport · type badge · per-person total.
   - **Totals column:** lines per service → divider → total charge / vendor payable / profit / received → divider → "Balance due" `Title/Stat` → Secondary "Record receipt". Second card: payable by vendor.
 
-## 6. Master-detail list — e.g. Vendors
+## 6. Master-detail list: e.g. Vendors
 **Question:** who do we buy from, and what do we owe them?
 - **Header:** search + Secondary "Add vendor" (the primary lives in the detail panel).
 - **Table card (fill):**
@@ -72,7 +72,7 @@ Clone the list screen, then add an absolute Scrim (`bg/scrim`, full frame) and a
   - Last payment row (top hairline, history icon).
   - **Primary "Pay vendor"** (full width), then Secondary "Open full ledger".
 
-## 7. Accounts / balances — e.g. Bank accounts
+## 7. Accounts / balances: e.g. Bank accounts
 **Question:** where did money come in and go out?
 - **Cash position card** (horizontal, gap 40):
   - Left: "Total balance · 4 accounts" · `Title/Display` + positive trend chip · two mini stats (Money in / Money out, each with its composition line).
@@ -84,10 +84,10 @@ Clone the list screen, then add an absolute Scrim (`bg/scrim`, full frame) and a
   - "Last movement …" meta.
   - **Card balances must sum to the total.**
 - **Movements table:**
-  - Columns: Date 150 · Movement (two-line: kind — party, method · handled by whom) fill · Account (two-line: bank, •••• last 4) 220 · Reference 110 · In 120 R · Out 120 R (neutral, em dash when empty) · actions.
+  - Columns: Date 150 · Movement (two-line: kind, party, method · handled by whom) fill · Account (two-line: bank, •••• last 4) 220 · Reference 110 · In 120 R · Out 120 R (neutral, em dash when empty) · actions.
   - Footer: "Totals" | "6 of 48 movements shown" (don't cram the label into a 150 column).
 
-## 8. Bills and spend — e.g. Expenses
+## 8. Bills and spend: e.g. Expenses
 **Question:** what does the branch spend, and which bills are due?
 - **Header:** notifications · Secondary month picker · Secondary "Set up a bill" · **Primary "Add expense"**.
 - **Row 1:**
@@ -103,14 +103,14 @@ Clone the list screen, then add an absolute Scrim (`bg/scrim`, full frame) and a
 - **Header:** period tabs (This month · Last month · This quarter · FY · Custom) · **Primary "Export report"**.
 - **Row 1:**
   - **Net result card (fill):** label + formula hint · `Title/Display` + trend chip + comparison.
-    - **Formula strip:** `bg/subtle`, hairline, terms separated by muted operators — Client charges − Vendor cost = Gross profit − Expenses = Net profit. It teaches the maths.
+    - **Formula strip:** `bg/subtle`, hairline, terms separated by muted operators: Client charges − Vendor cost = Gross profit − Expenses = Net profit. It teaches the maths.
     - Monthly bars (6 months, `bg/muted`; **current month `bg/accent`**, value labels on top).
-  - **Contribution card (352):** by staff — avatar initials, name + role/bookings, value + share %, 6px neutral share bar. A note on permission limits.
+  - **Contribution card (352):** by staff: avatar initials, name + role/bookings, value + share %, 6px neutral share bar. A note on permission limits.
 - **Row 2:**
   - **Breakdown table:** category (two-line with counts) · charges · cost · gross profit · margin. Footer rows: Gross profit totals → "Less branch expenses −184,600" → "Net profit". Tabs "grouped / split".
   - **Exports card (352):** rows with a download icon, name + row count, and a Quiet Small "Download".
 
-## 10. Administration — staff and permissions
+## 10. Administration: staff and permissions
 **Question:** who can use the system, and who did what?
 - **Header:** tabs Staff · Branches · Hotels · Activity · Settings · **Primary "Add staff"**.
 - **Table (fill):**
@@ -134,10 +134,53 @@ Clone the list screen, then add an absolute Scrim (`bg/scrim`, full frame) and a
   - **Full-width Primary "Sign in"**.
   - `Meta` "Forgot your password? Ask your branch admin to reset it."
   - Footer meta with branches.
-- **Showcase panel:** the flagship dashboard cloned at ~0.55 scale with `Shadow/Menu`, clipped at the panel edge, plus a one-line promise in `Title/Section` (e.g. "Every rupee traceable — who booked it, who collected it, where it went").
+- **Showcase panel:** the flagship dashboard cloned at ~0.55 scale with `Shadow/Menu`, clipped at the panel edge, plus a one-line promise in `Title/Section` (e.g. "Every rupee traceable: who booked it, who collected it, where it went").
 - **Error variant:** clone the frame, add an Alert (Error) above the fields ("That username and password don't match. Try again or ask your branch admin."), and set the Password Field state to Error.
 
 ---
+
+## 12. Kanban board (e.g. Tasks · Board)
+- Header: "All tasks" + a context line ("18 open · 4 due today · 1 overdue · drag a card to change its status"); a view switch (List · Board · Timeline · Calendar) whose active button may take the filled accent.
+- Toolbar: filter chips (All + one per category, each with a tinted icon tile and count), then Filter, Sort and the one black Add task.
+- Columns 256 to 320 wide on `bg/shell`, radius 16: status icon + name + count, `+` and `⋯`; show 4 cards then "Show N more"; dashed "+ Add task" at the bottom. A rarely used status (Later) collapses to a 44px vertical rail with its count.
+- Cards: see `Task Card` in components-spec. Draw one card mid-drag over another column.
+- Pitfall: "Done" grows forever. Show "Done this week" only.
+
+## 13. Gantt timeline (e.g. Tasks · Timeline)
+- Controls: range navigator ("21 Sep to 4 Oct" with arrows), Today, zoom segments Day · Week · Month · Quarter.
+- Left column 300: rows grouped by category (collapsible header with tinted icon tile and count), each row a status icon + title. Right: day columns with weekday + date, today's date in a black circle, weekends on `bg/subtle`, a 1.5px black "now" line.
+- Bars use the category bar pastel with a darker progress fill; an overdue task shows a dashed red box from its due date to today ("2 days late").
+- Drag state: bar with a black ring and a date tooltip; edge handles for resizing.
+
+## 14. Week schedule (e.g. Schedule)
+- Left 300: mini month (today black, selected week in grey circles, dots on busy days) above an agenda (Today / Tomorrow, pastel blocks with a coloured left border).
+- Main: week grid with the app clock's hours on the left and a **second time zone column on the right**; today's column tinted accent-soft; blocks show time + title; a now line with a time pill.
+- A suggestion banner ("2 tasks suggested for Saturday by the schedule maker · Accept both · Dismiss") and suggested blocks drawn dashed.
+- For night-shift users the window crosses midnight (5 PM to 2 AM). Draw it as one continuous column per night, not split at midnight.
+
+## 15. Goal list + breakdown wizard (e.g. Goals)
+- Master-detail: active goal cards (tinted icon tile, "24 of 64 h · due 24 Oct", pace badge On pace / Behind / At risk, thin progress bar; selected card gets a black ring) and a detail card with four stats (Done, Left, Pace needed, Finish by), a progress bar with a pace note, the parts in order (check / loader / clock icon, number, name, date note, bar, "5 of 9 h") and two actions ("Add 1.5 h daily block to Schedule", "Log hours").
+- Wizard modal (Wide): stepper Goal · Pace · Review; left = questions (what, total, parts, finish-by-date or fixed-per-day option cards, rest days, buffer toggle); right = a live "Your plan" panel (big "1 h a day", "18 h over 18 study days", sub-goals with date ranges, a toggle to add the daily block). Page behind dimmed by the scrim; the modal holds the only primary.
+
+## 16. Pipeline (e.g. LinkedIn leads)
+- A counters card on top: today's targets as 4 cells ("8 of 10") with segmented bars that turn green when met.
+- Stage columns 216 wide, each with an icon, count, one-line meaning and total value; compact lead cards (see `Lead Card`); late leads with a red ring and a "Done" follow-up button.
+- Below: posts this week (date tiles + status badges) and a funnel (how many leads reached each stage, bars in one hue, green only for Won).
+
+## 17. 2x2 decision matrix (e.g. Buy list, Eisenhower)
+- Axis labels in caps: URGENT / NOT URGENT on top, IMPORTANT / NOT IMPORTANT rotated on the left.
+- Four tinted quadrants (pink, blue, orange, yellow), each with an icon, name, one-line advice ("Buy this week"), total and count; white inner panel with draggable rows (grip, name, amount, note, "Mark bought", `⋯`) and a dashed "Add item".
+- A footer notice explains the side effect ("Marking an item bought adds it to Expenses").
+
+## 18. Analytics with rounded charts
+- Tabs with an underline (Tasks · Schedule · Money · Outreach) and a period segment (Week · Month · Quarter · Year); "Export report" prints.
+- Row 1: KPI table (accent-soft header), a donut with rounded gapped segments and a legend with counts, rounded progress bars per goal.
+- Row 2: diverging rounded bars (behind in steel to the left, on time in mint to the right of a centre line) and stacked horizontal bars (completed / remaining / overdue).
+- Row 3: grouped weekly bars (ink vs periwinkle). The current week's label says "so far".
+
+## 19. Settings with a section index
+- Left 220: sticky list of sections (anchors). Right: one card per section: time and currency (app time zone, second clock, currencies, exchange rate), targets, availability window, categories (name, colour, icon rows), optional AI key ("stored on your server only"), account and security (last sign in, failed attempts badge, lockout rule), data export.
+- One "Save changes" black button in the header for the preferences form; smaller forms (categories, password) save on their own.
 
 ## Content slots cheat-sheet (reuse for any domain)
 | Archetype | Finance back-office | SaaS admin | E-commerce admin |

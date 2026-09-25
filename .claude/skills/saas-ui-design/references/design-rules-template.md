@@ -1,14 +1,14 @@
-# Design rules — [PROJECT NAME]
+# Design rules: [PROJECT NAME]
 
 Copy this file into the project (e.g. `docs/design-rules.md` or `.claude/design-rules.md`), fill in the brackets, and paste it into any AI tool before it writes UI code: **"These are the rules. Follow them exactly."**
 
-Write the rules down or they get broken. When one screen says Delete and another says Remove, the user feels friction they will never report — they just find the app annoying.
+Write the rules down or they get broken. When one screen says Delete and another says Remove, the user feels friction they will never report: they just find the app annoying.
 
 ---
 
 ## Foundations
 
-**Icon set:** [Lucide | Phosphor | Feather] — one set only, never mixed, no emoji anywhere in the product UI.
+**Icon set:** [Lucide | Phosphor | Feather]: one set only, never mixed, no emoji anywhere in the product UI.
 **Icon sizes:** 16px inline, 20px buttons, 24px headers. Stroke width [1.5].
 
 **Type scale** (font: [ ]):
@@ -25,7 +25,7 @@ Nothing outside this table ships.
 
 **Radius:** [8px] for buttons, inputs, cards and modals. [Full] only for avatars and dots. No other radii.
 
-**Elevation:** hairline border `1px rgba(0,0,0,0.08)`. Shadows only on [modals, popovers] — never on cards or buttons.
+**Elevation:** hairline border `1px rgba(0,0,0,0.08)`. Shadows only on [modals, popovers]: never on cards or buttons.
 
 ## Color
 
@@ -68,7 +68,8 @@ One verb per concept, product-wide. Fill in and never deviate:
 ## Data formatting
 
 - Truncate strings at [40] characters with an ellipsis; full value in a tooltip.
-- Empty value placeholder: [—]. Never blank, never "null".
+- Empty value placeholder: [0 / "Not set"]. Never blank, never "null". No em dashes anywhere in the UI.
+- Time ranges: ["9:30 to 11:00 PM"]. App clock: [time zone]; second clock: [time zone, if any].
 - Numbers: [thousands separators, 0 decimals unless currency].
 - Dates: [DD MMM YYYY]. Relative time only for [activity feeds].
 - Currency: [ ].
@@ -79,7 +80,7 @@ Every data surface ships with: empty (explanatory + one action), loading (skelet
 
 ## Motion
 
-Allowed: skeleton fade-in, completion check/confetti, transitions ≤200ms, drawer slide from its own edge.
+Allowed: skeleton fade-in, completion check/confetti, transitions ≤200ms (transform and opacity only), drawer slide from its own edge, drag lift with a dashed drop placeholder.
 Banned: scroll-jacking, parallax, entry animations on cards, decorative fades.
 Pagination: **Load more** button, never infinite scroll.
 

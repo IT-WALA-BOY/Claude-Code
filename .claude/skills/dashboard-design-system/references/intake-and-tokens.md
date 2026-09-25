@@ -1,4 +1,4 @@
-# Intake and tokens — /dashboard-design-system
+# Intake and tokens: /dashboard-design-system
 
 ## 1. Sources to read before asking anything
 
@@ -8,15 +8,16 @@
 | Live app | Browser pane: `getComputedStyle` over `:root` CSS variables, font stack, screenshots of key pages | Current tokens, naming, pain points |
 | Codebase | Grep the main stylesheet for `:root`, component class names, the icon sprite | CSS variable names to keep as code syntax |
 | Reference kits (optional) | Read-only `use_figma` on the community file | Accent hex, type scale, radii, card treatment |
+| The user's own Figma file | Read every sticky note, text note and comment next to each reference image | Hard requirements (quote them), the icon set from layer names, features to add to the plan |
 
-Proven references: **Koala UI Free** `CfPwhOt0XCKiQLi2rQjcnN` (presentation, DM Sans scale, Phosphor Bold icons) · **Designo LMS Dashboards** `rU7JqyQw7cufujtXO9jCxt` (orange `#FF4B00`, sidebar CTA feel) · **SnowUI Dashboard Design System** `kaGQdYohgp9XkCfrSkaaKp` (layout density, neutral chrome).
+Proven references: **Koala UI Free** `CfPwhOt0XCKiQLi2rQjcnN` (presentation, DM Sans scale, Phosphor Bold icons) · **Designo LMS Dashboards** `rU7JqyQw7cufujtXO9jCxt` (orange `#FF4B00`, sidebar CTA feel) · **SnowUI Dashboard Design System** `kaGQdYohgp9XkCfrSkaaKp` (layout density, neutral chrome) · **Flowza** (Behance, SaaS project management: nested card shells, filled active nav, rounded stacked bars) · **Tasklify** (Lucide icons, black icon tiles on stat cards).
 
 ## 2. Brief extraction (print a 5-line summary)
 
 1. **Product and primary viewer** of the flagship dashboard.
 2. **The one question** the dashboard answers (e.g. "What did we book, and what did it earn?").
 3. **Top objects** by frequency (bookings, invoices, orders, tickets…) → the table.
-4. **Money and status vocabulary** — exact labels (Client charge, Vendor cost, Receivable…), status words (Pending, Issued, Overdue…) → badges and copy.
+4. **Money and status vocabulary**: exact labels (Client charge, Vendor cost, Receivable…), status words (Pending, Issued, Overdue…) → badges and copy.
 5. **What needs action** (overdue bills, unpaid refunds, pending approvals) → the Needs-attention list.
 Also note: roles and permissions (hide money columns without permission), multi-branch/workspace context (switcher), currency and date formats, required states.
 
@@ -25,7 +26,7 @@ Also note: roles and permissions (hide money columns without permission), multi-
 ### 3.1 `Primitives` (mode `Value`, scopes `[]`)
 | Group | Tokens (example = orange) |
 |---|---|
-| Accent | `orange/50 #FFF4EE` · `orange/100 #FFE4D6` · `orange/500 #FF4B00` · `orange/600 #E64400` · `orange/700 #C23A00` — generate from the chosen hex with `makeShades()` and keep 50/100/500/600/700. Name the group after the hue (`blue/…`), not "accent" |
+| Accent | `orange/50 #FFF4EE` · `orange/100 #FFE4D6` · `orange/500 #FF4B00` · `orange/600 #E64400` · `orange/700 #C23A00`: generate from the chosen hex with `makeShades()` and keep 50/100/500/600/700. Name the group after the hue (`blue/…`), not "accent" |
 | Neutral (Koala) | `white #FFFFFF` · `gray/25 #FAFAFA` · `gray/50 #F5F5F5` · `gray/100 #F0F0F0` · `gray/200 #E5E5E5` · `gray/300 #D4D4D4` · `gray/500 #767676` · `gray/700 #575757` · `gray/900 #1A1A1A` |
 | Status | `green/50 #F0FDF4` `green/700 #15803D` · `yellow/50 #FEFCE8` `yellow/700 #A16207` · `red/50 #FEF2F2` `red/700 #B91C1C` · `blue/50 #EFF6FF` `blue/700 #1D4ED8` |
 | Overlay | `overlay/scrim` `#1A1A1A` @ 40% |
@@ -69,7 +70,7 @@ Code syntax: reuse the product's CSS variable names when they exist (e.g. `bg/ac
 | `Title/Brand` | Bold | 16/24 | −3% | sidebar brand |
 | `Body/Regular` · `/Medium` · `/Semibold` | 400/500/600 | 14/20 | −3% | UI text, buttons, strong cells |
 | `Meta/Regular` · `/Medium` · `/Semibold` | 400/500/600 | 12/16 | −3% | sub-lines, labels, badges |
-| `Label/Small` | Medium | 12/16 | −2% | KPI labels, table heads, nav group labels — sentence case |
+| `Label/Small` | Medium | 12/16 | −2% | KPI labels, table heads, nav group labels: sentence case |
 | `Mono/Regular` | DM Mono | 12/16 | 0 | IBAN, PNR, IDs |
 
 ### 3.5 Effects
@@ -79,3 +80,10 @@ Code syntax: reuse the product's CSS variable names when they exist (e.g. `bg/ac
 - Text tokens ≥ 4.5:1 on `bg/surface` and `bg/canvas`; status text ≥ 4.5:1 on its soft tint.
 - `text/on-accent` on `bg/accent`: bright accents (orange `#FF4B00` = 3.4:1) fail AA for 14px. Ship semibold labels and **offer** the 700 shade for CTA fills. Record the user's decision.
 - Icons and graphics ≥ 3:1 (`icon/accent` can sit at 500).
+
+### 3.6 Icon stroke and font variables (Lucide builds)
+- `Icon` collection, one variable `icon/stroke` (FLOAT, scope STROKE_FLOAT) with modes **Regular 1.25** (default) · **Light 1** · **Thin 0.85**. Bind every glyph's `strokeWeight` to it; switching a frame's mode restyles every icon inside. In code: `stroke-width: var(--icon-stroke)` plus `vector-effect: non-scaling-stroke` on the sprite shapes, so the weight stays exact at 16, 20 and 24px.
+- Icon sizes: 16 in buttons, pills and meta lines; 18 in card headers; 20 in navigation; 24 only when an icon stands alone.
+- `Typography` collection: `font/family` (STRING) and `font/weight-regular|medium|semibold|bold` (STRING, e.g. "Semi Bold" for Inter). Bind text styles to them. When the chosen font is not installed where the file is built, set the family variable to the nearest available font and tell the user which variable to change.
+- Nested card shell token (Flowza variant): `bg/shell` → the canvas grey, used for the outer card shell on a white main panel.
+- Titles can be **medium (500) instead of semibold** when the reference relies on size and contrast for hierarchy (Flowza). Decide once and write it in design-rules.md.
