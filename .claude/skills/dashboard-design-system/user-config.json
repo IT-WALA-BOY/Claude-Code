@@ -1,0 +1,8 @@
+{
+  "figmaPlanKey": null,
+  "figmaPlanName": null,
+  "templatesProjectName": "Templates & Design Systems",
+  "templatesProjectUrl": null,
+  "templatesProjectId": null,
+  "note": "Figma's API cannot create projects. Create a project named 'Templates & Design Systems' once in Figma, paste its URL when the skill asks, and the skill saves templatesProjectUrl/templatesProjectId here."
+}
