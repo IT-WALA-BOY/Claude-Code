@@ -4,13 +4,18 @@ The dashboard is plain PHP 8.1+ and MySQL (or MariaDB). There is no build step. 
 
 This guide was run end to end on **XAMPP 8.2.12** (Apache 2.4.58, PHP 8.2.12, MariaDB 10.4): install, sign in, every screen, the phpMyAdmin export and import, and a second copy set up by hand from the imported data.
 
-## 1. Make the package
+## 1. Get the package
 
-```bash
-sh tools/package.sh
-```
+The package is `workflow-dashboard.zip`: only the files the server needs (no docs, tools or Git history). If someone already sent it to you, skip to step 2.
 
-This writes `dist/workflow-dashboard.zip` with only the files the server needs (no docs, tools or Git history).
+To build it yourself, first open a terminal **in the project folder** (the one that has `index.php` in it), not in `C:\WINDOWS\system32`:
+
+- **Windows (PowerShell):** `cd C:\path\to\project` then `powershell -ExecutionPolicy Bypass -File tools\package.ps1`
+- **Mac, Linux or Git Bash:** `cd /path/to/project` then `sh tools/package.sh`
+
+Both write `dist/workflow-dashboard.zip`.
+
+No terminal? Downloading the whole project from GitHub (**Code > Download ZIP**) also works in XAMPP. It just includes extra folders (docs, tools) that `.htaccess` keeps private.
 
 ## 2. Try it locally with XAMPP (optional)
 
