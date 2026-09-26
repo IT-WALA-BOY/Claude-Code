@@ -1,0 +1,486 @@
+{
+ "copyright": "© RecNation Storage 2026 All rights reserved",
+ "slides": [
+  {
+   "type": "cover",
+   "title": "August 2026 Financial Update"
+  },
+  {
+   "eyebrow": "Monthly performance",
+   "title": "August 2026 Performance Snapshot",
+   "subtitle": "Actual vs. prior month and plan · whole portfolio · as reported",
+   "source": "Source: Planful via BigQuery (recnation-analytics.planful) · 2026 Plan Final v2 · costs shown favourable-positive",
+   "blocks": [
+    {
+     "type": "table",
+     "kind": "statement",
+     "fill_width": true,
+     "corner": "",
+     "groups": [
+      {
+       "label": "Actual",
+       "cols": [
+        "Jul-26",
+        "Aug-26"
+       ]
+      },
+      {
+       "label": "Plan",
+       "cols": [
+        "Aug-26"
+       ]
+      },
+      {
+       "label": "Aug-26 vs. Jul-26",
+       "cols": [
+        "$",
+        "%"
+       ]
+      },
+      {
+       "label": "Aug-26 vs. Plan",
+       "cols": [
+        "$",
+        "%"
+       ]
+      },
+      {
+       "label": "YTD Aug-26",
+       "cols": [
+        "Actual",
+        "Plan"
+       ]
+      },
+      {
+       "label": "YTD vs. Plan",
+       "cols": [
+        "$",
+        "%"
+       ]
+      }
+     ],
+     "chips": [
+      4,
+      6,
+      10
+     ],
+     "rows": [
+      {
+       "label": "Revenues",
+       "style": "total",
+       "cells": [
+        "2,096,909",
+        "2,102,565",
+        "2,215,671",
+        "5,656",
+        "0.3%",
+        "(113,106)",
+        "(5.1)%",
+        "16,829,353",
+        "17,085,155",
+        "(255,802)",
+        "(1.5)%"
+       ]
+      },
+      {
+       "label": "Management Fee",
+       "cells": [
+        "112,014",
+        "111,571",
+        "118,376",
+        "443",
+        "0.4%",
+        "6,805",
+        "5.7%",
+        "894,155",
+        "906,589",
+        "12,434",
+        "1.4%"
+       ]
+      },
+      {
+       "label": "Property Taxes",
+       "cells": [
+        "286,040",
+        "264,894",
+        "267,738",
+        "21,146",
+        "7.4%",
+        "2,844",
+        "1.1%",
+        "2,108,328",
+        "2,119,363",
+        "11,035",
+        "0.5%"
+       ]
+      },
+      {
+       "label": "Franchise Taxes",
+       "cells": [
+        "8,916",
+        "8,897",
+        "9,729",
+        "19",
+        "0.2%",
+        "832",
+        "8.6%",
+        "72,632",
+        "74,328",
+        "1,696",
+        "2.3%"
+       ]
+      },
+      {
+       "label": "Site maintenance",
+       "cells": [
+        "131,323",
+        "139,422",
+        "140,387",
+        "(8,099)",
+        "(6.2)%",
+        "965",
+        "0.7%",
+        "1,100,265",
+        "1,119,570",
+        "19,305",
+        "1.7%"
+       ]
+      },
+      {
+       "label": "Insurance",
+       "cells": [
+        "56,752",
+        "55,679",
+        "59,321",
+        "1,073",
+        "1.9%",
+        "3,642",
+        "6.1%",
+        "450,221",
+        "479,165",
+        "28,944",
+        "6.0%"
+       ]
+      },
+      {
+       "label": "Utilities",
+       "cells": [
+        "43,424",
+        "45,238",
+        "42,366",
+        "(1,814)",
+        "(4.2)%",
+        "(2,872)",
+        "(6.8)%",
+        "322,061",
+        "341,102",
+        "19,041",
+        "5.6%"
+       ]
+      },
+      {
+       "label": "Bank & CC Fees",
+       "cells": [
+        "51,800",
+        "51,568",
+        "58,059",
+        "232",
+        "0.4%",
+        "6,491",
+        "11.2%",
+        "446,458",
+        "464,585",
+        "18,127",
+        "3.9%"
+       ]
+      },
+      {
+       "label": "Security, Access, Other",
+       "cells": [
+        "27,947",
+        "31,132",
+        "32,995",
+        "(3,185)",
+        "(11.4)%",
+        "1,863",
+        "5.6%",
+        "247,420",
+        "262,556",
+        "15,136",
+        "5.8%"
+       ]
+      },
+      {
+       "label": "Operating Costs",
+       "style": "total",
+       "cells": [
+        "718,216",
+        "708,401",
+        "728,971",
+        "9,815",
+        "1.4%",
+        "20,570",
+        "2.8%",
+        "5,641,540",
+        "5,767,258",
+        "125,718",
+        "2.2%"
+       ]
+      },
+      {
+       "label": "Net Operating Income",
+       "style": "total",
+       "cells": [
+        "1,378,693",
+        "1,394,164",
+        "1,486,700",
+        "15,471",
+        "1.1%",
+        "(92,536)",
+        "(6.2)%",
+        "11,187,813",
+        "11,317,897",
+        "(130,084)",
+        "(1.1)%"
+       ]
+      },
+      {
+       "label": "% of Revenue",
+       "style": "pct",
+       "cells": [
+        "65.7%",
+        "66.3%",
+        "67.1%",
+        "0.6%",
+        "",
+        "(0.8)%",
+        "",
+        "66.5%",
+        "66.2%",
+        "0.2%",
+        ""
+       ]
+      },
+      {
+       "label": "SG&A",
+       "cells": [
+        "56,607",
+        "55,096",
+        "47,049",
+        "1,511",
+        "2.7%",
+        "(8,047)",
+        "(17.1)%",
+        "426,282",
+        "380,473",
+        "(45,809)",
+        "(12.0)%"
+       ]
+      },
+      {
+       "label": "Adjusted EBITDA",
+       "style": "total",
+       "cells": [
+        "1,322,086",
+        "1,339,068",
+        "1,439,651",
+        "16,982",
+        "1.3%",
+        "(100,583)",
+        "(7.0)%",
+        "10,761,531",
+        "10,937,424",
+        "(175,893)",
+        "(1.6)%"
+       ]
+      },
+      {
+       "label": "% of Revenue",
+       "style": "pct",
+       "cells": [
+        "63.0%",
+        "63.7%",
+        "65.0%",
+        "0.6%",
+        "",
+        "(1.3)%",
+        "",
+        "63.9%",
+        "64.0%",
+        "(0.1)%",
+        ""
+       ]
+      }
+     ]
+    }
+   ],
+   "bullets": [
+    "Property taxes −$21.1K MoM as the July consultant fee did not recur",
+    "SG&A $46K over plan YTD on paid advertising; utilities $2.9K over plan",
+    "Operating costs $21K favourable to plan and $10K better than July",
+    "YTD revenue $256K behind plan, with Houston $189K of the gap"
+   ],
+   "takeaway": "Revenue $2,103K, +0.3% MoM and 5.1% below plan; NOI $1,394K at a 66.3% margin, $93K under plan."
+  },
+  {
+   "eyebrow": "Retention",
+   "title": "Discount Incentive: Retention & Revenue Impact",
+   "subtitle": "RecNation Storage  |  Pre-churn incentive program (Groups A / B / C)  |  As of September 15, 2026",
+   "source": "Illustrative model: 100 tenants/group, $225/mo shared rent, using each group's real Accepters vs Control retention lift × 6 mo. Not actual dollars at current scale. Source: discount_incentive_analysis.xlsx.",
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": "Retention lift",
+       "value": "+13.4 pp",
+       "context": "discount accepters vs. Control (all groups)"
+      },
+      {
+       "label": "Discount cost",
+       "value": "$10,629",
+       "context": "Total discount cost paid out (accepted offers only)",
+       "authored_label": true
+      },
+      {
+       "label": "Most cost-effective (illustrative)",
+       "value": "$4.74x",
+       "context": "Group A's return per $1 discounted",
+       "accent": true
+      },
+      {
+       "label": "Least cost-effective (illustrative)",
+       "value": "$0.91x",
+       "context": "Group C falls below breakeven",
+       "accent": true
+      }
+     ]
+    },
+    {
+     "type": "row",
+     "items": [
+      {
+       "type": "table",
+       "kind": "experiment",
+       "heading": "Retention: Discount Accepters vs. Control",
+       "subheading": "\"Accepted\" = SiteLink/BigQuery-confirmed discount applied",
+       "corner": "Cohort",
+       "groups": [
+        {
+         "cols": [
+          "N",
+          "Retention %",
+          "vs Control"
+         ]
+        }
+       ],
+       "chips": [
+        2
+       ],
+       "rows": [
+        {
+         "label": "All Accepters (A+B+C)",
+         "style": "plain",
+         "cells": [
+          "118",
+          "94.9%",
+          "+13.4 pp"
+         ]
+        },
+        {
+         "label": "Accepted A — 20% Off 2nd Mo.",
+         "style": "win",
+         "cells": [
+          "37",
+          "97.3%",
+          "+15.8 pp"
+         ]
+        },
+        {
+         "label": "Accepted C — 6th Month Free",
+         "style": "plain",
+         "cells": [
+          "30",
+          "96.7%",
+          "+15.2 pp"
+         ]
+        },
+        {
+         "label": "Accepted B — 20% Off 3rd Mo.",
+         "style": "plain",
+         "cells": [
+          "51",
+          "92.2%",
+          "+10.7 pp"
+         ]
+        },
+        {
+         "label": "Control (baseline)",
+         "style": "control",
+         "cells": [
+          "1,384",
+          "81.5%",
+          "—"
+         ]
+        }
+       ],
+       "caveat": "Arms A, B and C are each under 100 tenants; read the lift as directional."
+      },
+      {
+       "type": "table",
+       "kind": "experiment",
+       "heading": "Cost-Effectiveness (Normalized, Illustrative)",
+       "subheading": "Same 100-tenant cohort + $225/mo rent for all 3 — isolates offer structure from scale.",
+       "corner": "Grp",
+       "groups": [
+        {
+         "cols": [
+          "Disc. Cost",
+          "Retention Val.",
+          "Net Impact",
+          "Value/$1"
+         ]
+        }
+       ],
+       "rows": [
+        {
+         "label": "A",
+         "style": "win",
+         "cells": [
+          "$4,500",
+          "$21,330",
+          "+$16,830",
+          "$4.74"
+         ]
+        },
+        {
+         "label": "B",
+         "style": "plain",
+         "cells": [
+          "$4,500",
+          "$14,445",
+          "+$9,945",
+          "$3.21"
+         ]
+        },
+        {
+         "label": "C",
+         "style": "plain",
+         "cells": [
+          "$22,500",
+          "$20,520",
+          "−$1,980",
+          "$0.91"
+         ]
+        }
+       ],
+       "note": "Per 100 tenants: Discount Cost = 100 × discount % × $225/mo. Retention Value = lift vs. Control × 100 × $225/mo × 6 mo. The Value/$1 ratio holds at any shared rent (it cancels out)."
+      }
+     ]
+    }
+   ],
+   "takeaway": "KEY TAKEAWAY On a level playing field (same 100-tenant cohort, same rent), Group A returns $4.74 in retention value per $1 discounted — the most cost-effective by far. Group C's free month costs 5x more than A/B and falls below breakeven ($0.91 per $1).",
+   "recommendation": "RECOMMENDATION Scale Group A first — best return per dollar. Group B is a solid second. Reconsider Group C's structure (or shrink the discount) before expanding it — its cost isn't earning a proportional retention lift."
+  }
+ ]
+}
